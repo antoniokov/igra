@@ -2,6 +2,7 @@ body {
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
     color: #666666;
+    width: 1000px;
 }
 
 table {
@@ -47,7 +48,7 @@ td.losses {
 }
 
 .result {
-    display:block;
+    display: inline-block;
     box-sizing: border-box;
     border-radius: 2px;
     width: 18px;
@@ -77,4 +78,31 @@ td.losses {
 
 .result:hover {
     box-shadow: 0 0 2px black;
+}
+
+
+
+.legend {
+    margin-left: 248px;
+}
+
+
+.legend > div {
+    display: inline-block;
+}
+
+.legend .result {
+    background-color: transparent;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+}
+
+.encoding {
+    padding-right: 8px;
+}
+
+.legend-label {
+    padding-left: 4px;
+    font-size: 11px;
 }
