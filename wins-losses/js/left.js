@@ -3,7 +3,7 @@ function drawLeft(teams) {
         .append('table');
 
     const columns = [
-        { id: 'name', label: 'Команда' },
+        { id: 'name', label: 'Команда'},
         { id: 'wins', label: '+' },
         { id: 'losses', label: '−' },
         { id: 'percentage', label: '%' },
@@ -13,6 +13,7 @@ function drawLeft(teams) {
         .selectAll('th')
         .data(columns)
         .enter().append('th')
+        .attr('class', c => c.id)
         .text(c => c.label);
 
     const tbody = table.append('tbody');
@@ -21,7 +22,11 @@ function drawLeft(teams) {
         .enter().append('tr');
 
     const cells = rows.selectAll('td')
-        .data(t => columns.map(c => t[c.id]))
+        .data(t => columns.map(c => ({
+            id: c.id,
+            label: t[c.id]
+        })))
         .enter().append('td')
-        .text(c => c);
+        .attr('class', c => c.id)
+        .text(c => c.label);
 }

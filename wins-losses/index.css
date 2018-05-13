@@ -1,3 +1,31 @@
 body {
     font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    color: #666666;
+}
+
+td, th {
+    padding-right: 8px;
+}
+
+td {
+    height: 24px;
+}
+
+.wins, .losses, .percentage {
+    text-align: right;
+}
+
+.name {
+    text-align: left;
+}
+
+td.wins {
+    color: #26691F;
+    font-weight: 500;
+}
+
+td.losses {
+    color: #9E9E9E;
+    font-weight: 500;
 }

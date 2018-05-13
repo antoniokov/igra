@@ -1,5 +1,5 @@
 function getTeams(games) {
-    const teams = games
+    const teamsObj = games
         .filter(g => g['Тип'] !== 'Благотворительная')
         .reduce((grouped, g) => {
             const team = g['Команда'];
@@ -27,7 +27,11 @@ function getTeams(games) {
             return grouped;
         }, {});
 
-    return Object.keys(teams)
-        .map(t => teams[t])
+    const teams = Object.keys(teamsObj)
+        .map(t => teamsObj[t])
         .filter(t => t.games.length >= 3);
+
+    teams.sort((a, b) => parseFloat(b.wins)/b.games.length - parseFloat(a.wins)/a.games.length);
+
+    return teams
 }
