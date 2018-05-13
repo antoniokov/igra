@@ -4,8 +4,16 @@ body {
     color: #666666;
 }
 
+table {
+    float: left;
+}
+
 td, th {
     padding-right: 8px;
+}
+
+th {
+    height: 18px;
 }
 
 td {
