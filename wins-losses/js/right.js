@@ -18,16 +18,15 @@ function drawRight(teams) {
         .enter().append('tr');
 
     const cells = rows.selectAll('td')
-        .data(t => t.games.map(g => ({
-            team: t.name,
-            game: g
-        })))
+        .data(t => t.games)
         .enter().append('td')
-        .append('div')
+        .append('a')
+        .attr('href', g => g['Видео'])
+        .attr('target', '_blank')
         .attr('class', 'result')
-        .classed('win', g => g.game['Выиграл'] === 'Знатоки')
-        .classed('series-final', g => g.game['Тип'] === 'Финал' && g.game['Серия'] !== 'Зима')
-        .classed('year-final', g => g.game['Тип'] === 'Финал' && g.game['Серия'] === 'Зима')
-        .classed('all-in', g => g.game['РР'] === 'РР')
-        .style('opacity', g => differenceToOpacity(Math.abs(g.game['Знатоки'] - g.game['Телезрители'])));
+        .classed('win', g => g['Выиграл'] === 'Знатоки')
+        .classed('series-final', g => g['Тип'] === 'Финал' && g['Серия'] !== 'Зима')
+        .classed('year-final', g => g['Тип'] === 'Финал' && g['Серия'] === 'Зима')
+        .classed('all-in', g => g['РР'] === 'РР')
+        .style('opacity', g => differenceToOpacity(Math.abs(g['Знатоки'] - g['Телезрители'])));
 }

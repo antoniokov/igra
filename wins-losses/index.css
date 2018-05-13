@@ -47,6 +47,7 @@ td.losses {
 }
 
 .result {
+    display:block;
     box-sizing: border-box;
     border-radius: 2px;
     width: 18px;
@@ -72,4 +73,8 @@ td.losses {
 
 .year-final {
     border: solid 1px #09A6DA;
+}
+
+.result:hover {
+    box-shadow: 0 0 2px black;
 }
