@@ -1,6 +1,7 @@
 function drawLeft(teams) {
     const table = d3.select('body')
-        .append('table');
+        .append('table')
+        .attr('class', 'left');
 
     const columns = [
         { id: 'name', label: 'Команда'},
