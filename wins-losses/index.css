@@ -2,7 +2,6 @@ body {
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
     color: #666666;
-    width: 850px;
 }
 
 table {
@@ -11,6 +10,7 @@ table {
 
 .left td, th {
     padding-right: 8px;
+    white-space: nowrap;
 }
 
 th {
@@ -83,12 +83,6 @@ td.losses {
 }
 
 
-
-.legend {
-    margin-left: 248px;
-}
-
-
 .legend > div {
     display: inline-block;
 }
@@ -107,4 +101,12 @@ td.losses {
 .legend-label {
     padding-left: 4px;
     font-size: 11px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-column-gap: 0;
+    grid-row-gap: 8px;
+    align-items: start;
 }

@@ -1,5 +1,5 @@
 function drawLegend() {
-    const legend = d3.select('body')
+    const legend = d3.select('#legend')
         .append('div')
         .attr('class', 'legend');
 

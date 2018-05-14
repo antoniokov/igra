@@ -1,5 +1,5 @@
 function drawLeft(teams) {
-    const table = d3.select('body')
+    const table = d3.select('#left')
         .append('table')
         .attr('class', 'left');
 

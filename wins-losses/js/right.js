@@ -4,7 +4,7 @@ const differenceToOpacity = d3.scaleLinear()
 
 
 function drawRight(teams) {
-    const table = d3.select('body')
+    const table = d3.select('#right')
         .append('table')
         .attr('class', 'right');
 
