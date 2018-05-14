@@ -3,6 +3,4 @@ function draw(games, tabletop) {
     drawLeft(teams);
     drawRight(teams);
     drawLegend();
-
-    console.log('done');
 }

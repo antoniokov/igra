@@ -29,7 +29,7 @@ function getTeams(games) {
 
     const teams = Object.keys(teamsObj)
         .map(t => teamsObj[t])
-        .filter(t => t.games.length >= 3);
+        .filter(t => t.games.length >= 0);
 
     teams.sort((a, b) => parseFloat(b.wins)/b.games.length - parseFloat(a.wins)/a.games.length);
 

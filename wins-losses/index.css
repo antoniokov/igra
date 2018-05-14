@@ -2,7 +2,7 @@ body {
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
     color: #666666;
-    width: 1000px;
+    width: 850px;
 }
 
 table {
@@ -43,15 +43,17 @@ td.losses {
 
 
 .right td {
-    width: 18px;
+    width: 14px;
     padding-right: 0;
+    padding-left: 0;
 }
 
 .result {
     display: inline-block;
+    vertical-align: middle;
     box-sizing: border-box;
     border-radius: 2px;
-    width: 18px;
+    width: 14px;
     height:18px;
     background-color: #9E9E9E;
 }
