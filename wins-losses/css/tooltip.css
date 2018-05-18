@@ -1,0 +1,28 @@
+#tooltip {
+    width: 240px;
+    padding: 12px;
+    position: absolute;
+    z-index: 1000;
+
+    visibility: hidden;
+
+    background-color: white;
+    box-shadow: 0 0 1px gray;
+}
+
+#tooltip h3 {
+    color: black;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 2px 0;
+}
+
+#tooltip p {
+    line-height: 18px;
+    color: #9E9E9E;
+    margin: 0;
+}
+
+#tooltip span {
+    color: black;
+}

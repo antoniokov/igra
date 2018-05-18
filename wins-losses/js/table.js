@@ -1,4 +1,4 @@
-function drawLeft(teams) {
+function drawTable(teams) {
     const table = d3.select('#left')
         .append('table')
         .attr('class', 'left');

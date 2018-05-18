@@ -1,6 +1,7 @@
 function draw(games, tabletop) {
     const teams = getTeams(games);
-    drawLeft(teams);
-    drawRight(teams);
+    drawTable(teams);
+    drawBricks(teams);
     drawLegend();
+    //drawTooltip();
 }

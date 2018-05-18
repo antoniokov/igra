@@ -14,7 +14,10 @@ function getTeams(games) {
                 };
             }
 
-            grouped[team].games.push(g);
+            const game = Object.assign(g);
+            const parts = g['Дата'].split('.');
+            game['Дата'] = new Date(parts[2], parts[1], parts[0]);
+            grouped[team].games.push(game);
 
             if (g['Выиграл'] === 'Знатоки') {
                 grouped[team].wins++;
