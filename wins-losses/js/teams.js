@@ -1,4 +1,4 @@
-function getTeams(games) {
+function getTeams(games, config) {
     const teamsObj = games
         .filter(g => g['Тип'] !== 'Благотворительная')
         .reduce((grouped, g) => {
@@ -14,17 +14,8 @@ function getTeams(games) {
                 };
             }
 
-            const game = Object.assign(g);
-            const parts = g['Дата'].split('.');
-            game['Дата'] = new Date(parts[2], parts[1], parts[0]);
-            grouped[team].games.push(game);
-
-            if (g['Выиграл'] === 'Знатоки') {
-                grouped[team].wins++;
-            } else {
-                grouped[team].losses++;
-            }
-            
+            grouped[team].games.push(g);
+            g['Выиграл'] === 'Знатоки' ? grouped[team].wins++ : grouped[team].losses++;
             grouped[team].percentage = (100* grouped[team].wins / grouped[team].games.length).toFixed(1).toString();
 
             return grouped;
@@ -32,9 +23,13 @@ function getTeams(games) {
 
     const teams = Object.keys(teamsObj)
         .map(t => teamsObj[t])
-        .filter(t => t.games.length >= 0);
+        .filter(t => t.games.length >= (config.cutoff || 0));
 
-    teams.sort((a, b) => parseFloat(b.wins)/b.games.length - parseFloat(a.wins)/a.games.length);
+    const sortingFunctions = {
+        gamesCount: (a, b) => b.games.length - a.games.length,
+        winningPercentage: (a, b) => parseFloat(b.wins)/b.games.length - parseFloat(a.wins)/a.games.length
+    };
 
+    teams.sort(sortingFunctions[config.sort || 'winningPercentage']);
     return teams
 }

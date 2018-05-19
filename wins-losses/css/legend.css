@@ -1,0 +1,24 @@
+#legend {
+    min-width: 300px;
+}
+
+
+#legend > div {
+    display: inline-block;
+}
+
+#legend .result {
+    background-color: transparent;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+}
+
+.encoding {
+    padding-right: 8px;
+}
+
+.legend-label {
+    padding-left: 4px;
+    font-size: 11px;
+}

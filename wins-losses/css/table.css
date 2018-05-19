@@ -1,0 +1,56 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    color: #666666;
+}
+
+table {
+    float: left;
+}
+
+.left td, .left th {
+    padding-right: 8px;
+    white-space: nowrap;
+}
+
+th {
+    height: 18px;
+}
+
+td {
+    height: 24px;
+}
+
+tr {
+    height: 26px;
+}
+
+.wins, .losses, .percentage {
+    text-align: right;
+}
+
+.name {
+    text-align: left;
+}
+
+td.wins {
+    color: #206925;
+    font-weight: 500;
+}
+
+td.losses {
+    color: #9E9E9E;
+    font-weight: 500;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-column-gap: 0;
+    grid-row-gap: 8px;
+    align-items: start;
+}
+
+#right {
+    display: inline-flex;
+}

@@ -3,14 +3,17 @@ const differenceToOpacity = d3.scaleLinear()
     .range([0.3, 1.0]);
 
 
-function drawBricks(teams) {
+function drawBricks(teams, config) {
     const table = d3.select('#right')
         .append('table')
-            .attr('class', 'right');
+            .attr('class', 'bricks');
 
+    const mostGames = Math.max(...teams.map(t => t.games.length));
     const thead = table.append('thead');
     thead.append('tr')
-        .append('th');
+        .append('th')
+        .attr('colspan', mostGames)
+        .text(config.header || '');
 
     const tbody = table.append('tbody');
     const rows = tbody.selectAll('tr')

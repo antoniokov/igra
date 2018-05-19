@@ -1,7 +1,5 @@
 function drawLegend() {
-    const legend = d3.select('#legend')
-        .append('div')
-        .attr('class', 'legend');
+    const legend = d3.select('#legend');
 
     const encodings = [
         { id: 'all-in', label: 'решающий раунд' },
