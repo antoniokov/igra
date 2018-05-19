@@ -19,6 +19,21 @@
 }
 
 .legend-label {
-    padding-left: 4px;
     font-size: 11px;
+}
+
+#legend-all-in {
+    padding-right: 4px;
+    border-right: solid 2px #717171;
+    border-radius: 2px;
+}
+
+#legend-series-final {
+    border-bottom: solid 2px #E2E200;
+    border-radius: 2px;
+}
+
+#legend-year-final {
+    border-bottom: solid 2px #09A6DA;
+    border-radius: 2px;
 }

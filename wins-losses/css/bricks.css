@@ -23,19 +23,19 @@ a.result:hover {
 }
 
 .all-in {
-    border: solid 1px #717171;
+    border-right: solid 2px #717171;
 }
 
 .all-in.win {
-    border: solid 1px black;
+    border-right: solid 2px black;
 }
 
 .series-final {
-    border: solid 1px #FF8101;
+    border-bottom: solid 2px #E2E200;
 }
 
 .year-final {
-    border: solid 1px #09A6DA;
+    border-bottom: solid 2px #09A6DA;
 }
 
 table.bricks {
