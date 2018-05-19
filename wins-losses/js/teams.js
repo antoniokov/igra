@@ -1,4 +1,6 @@
 function getTeams(games, config) {
+    games.sort((a,b) => a['Дата'] - b['Дата']);
+
     const teamsObj = games
         .filter(g => g['Тип'] !== 'Благотворительная')
         .reduce((grouped, g) => {
