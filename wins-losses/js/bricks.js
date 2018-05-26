@@ -25,8 +25,8 @@ function drawBricks(teams, config = {}) {
         .enter().append('td');
 
     const bricks = cells.append('a')
-        .attr('href', g => g['Видео'])
-        .attr('target', '_blank')
+        .attr('href', g => g['Видео'] || 'javascript:void(0)')
+        .attr('target', g => g['Видео'] ? '_blank' : null)
         .attr('class', 'result')
         .classed('win', g => g['Выиграл'] === 'Знатоки')
         .classed('series-final', g => g['Тип'] === 'Финал' && g['Серия'] !== 'Зима')
