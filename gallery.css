@@ -18,4 +18,11 @@ h2 {
     font-family: "Open Sans", sans-serif;
     font-size: 1.4em;
     margin: 0.7em 0 0.35em 0;
+    display: inline-block;
+}
+
+.instagram-logo {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
 }
