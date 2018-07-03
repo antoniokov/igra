@@ -26,3 +26,8 @@ h2 {
     height: 16px;
     margin-left: 4px;
 }
+
+.tableauPlaceholder {
+    max-width: 1000px;
+    margin-top: 4px;
+}
