@@ -73,7 +73,47 @@ const draw = async () => {
             fitModel: 'entire-view'
         },
         plugins: [
-            Taucharts.api.plugins.get('tooltip')()
+            Taucharts.api.plugins.get('tooltip')(),
+            Taucharts.api.plugins.get('annotations')({
+                items: [
+                    {
+                        dim: 'Ответов',
+                        val: 48,
+                        color: '#24693D',
+                        text: 'Алексей Полевой'
+                    },
+                    {
+                        dim: 'Игр',
+                        val: 17,
+                        color: '#24693D',
+                        text: 'Юлия Бейнер'
+                    },
+                    {
+                        dim: 'Финалов',
+                        val: 6,
+                        color: '#24693D',
+                        text: 'Елена Шибут'
+                    },
+                    {
+                        dim: 'Призов лучшему знатоку',
+                        val: 7,
+                        color: '#24693D',
+                        text: 'Алексей Полевой'
+                    },
+                    {
+                        dim: 'Суперблицев',
+                        val: 2,
+                        color: '#24693D',
+                        text: 'Алексей Полевой'
+                    },
+                    {
+                        dim: 'Решающих раундов',
+                        val: 2,
+                        color: '#24693D',
+                        text: 'Евгений Зайцев'
+                    }
+                ]
+            })
         ]
     };
 
