@@ -6,12 +6,20 @@ function load() {
     if (!isMocked) {
         return Tabletop.init({
             key: publicSpreadsheetUrl,
-            callback: data => draw(process(strip(data)))
+            parseNumbers: true,
+            wanted: ['Серии', 'Игры', 'Составы', 'Раунды', 'Вопросы'],
+            callback: data => draw(process(strip(data))['Игры'])
         });
     }
 
-    const processedGames = process({ 'Игры': GAMES });
-    draw(processedGames);
+    const processedSheets = process({
+        //'Серии': SERIES,
+        'Игры': GAMES,
+        //'Составы': LINEUPS,
+        //'Раунды': ROUNDS,
+        //'Вопросы': QUESTIONS
+    });
+    draw(processedSheets['Игры']);
 }
 
 window.addEventListener('DOMContentLoaded', load);

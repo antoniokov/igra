@@ -7,17 +7,25 @@ function strip(data) {
 function process(sheets) {
     const parse = {
         date: d => new Date(...d.split('.').reverse()),
-        number: n => Number.parseInt(n)
+        number: n => Number.parseInt(n) // using Tabletop's parseNumbers instead
     };
 
     const meta = {
-        date: ['Дата'],
-        number: ['З', 'Т', 'Знатоки', 'Телезрители', 'Сезон', 'Игра', 'Лучший вопрос']
+        date: ['Дата']
+        //number: ['З', 'Т', 'Знатоки', 'Телезрители', 'Сезон', 'Игра', 'Лучший вопрос']
     };
 
-    return sheets['Игры'].map(g => {
-        const game = Object.assign({}, g);
-        Object.keys(meta).forEach(type => meta[type].forEach(field => game[field] = parse[type](g[field])));
-        return game;
-    });
+    const processed = Object.keys(sheets).reduce((result, s) => {
+        return Object.assign(result, {
+            [s]: sheets[s].map(r => {
+                const row = Object.assign({}, r);
+                Object.keys(meta).forEach(type => meta[type]
+                    .filter(field => field in row)
+                    .forEach(field => row[field] = parse[type](r[field])));
+                return row;
+            })
+        });
+    }, {});
+
+    return processed;
 }

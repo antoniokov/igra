@@ -1,4 +1,4 @@
-const processedGames = process({ 'Игры': GAMES });
+const processedGames = process({ 'Игры': GAMES })['Игры'];
 
 function addMinMaxLabels(data, measure, formatFunction) {
     const minMax = data.reduce((extrema, d, i, arr) => {
@@ -15,8 +15,6 @@ function addMinMaxLabels(data, measure, formatFunction) {
         const index = minMax[k];
         dataLabeled[index].label = formatFunction(dataLabeled[index][measure]);
     });
-
-    console.log(dataLabeled);
 
     return dataLabeled;
 }
@@ -76,4 +74,4 @@ const chart = new Taucharts.Chart({
     ]
 });
 
-chart.renderTo('#chart-winning-percentage');
+chart.renderTo('#chart-winning-percentage-by-seasons');
