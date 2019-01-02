@@ -6,7 +6,7 @@ function strip(data) {
 
 function process(sheets) {
     const parse = {
-        date: d => new Date(...d.split('.').reverse()),
+        date: d => new Date(d),
         number: n => Number.parseInt(n) // using Tabletop's parseNumbers instead
     };
 
