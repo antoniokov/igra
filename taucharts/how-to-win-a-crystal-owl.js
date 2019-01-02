@@ -83,6 +83,19 @@ const sortingFunctionTemplate = measure => {
 
 statsBeforeOwl.sort(sortingFunctionTemplate(defaultMeasure));
 
+const statsPluses = statsBeforeOwl.filter(s => s['Результат'] === '+');
+const annotations = Object.keys(measuresSplit).reduce((result, m) => {
+    const sum = statsPluses.reduce((result, s) => result + s[m], 0);
+    const average = sum/statsPluses.length;
+    result.push({
+        dim: m,
+        val: Math.round(average),
+        color: '#24693D',
+        text: `В среднем ${Math.round(average)}`
+    });
+    return result;
+}, []);
+
 const howToWinACrystalOwlConfig = {
     data: statsBeforeOwl,
     type: 'horizontal-stacked-bar',
@@ -102,7 +115,10 @@ const howToWinACrystalOwlConfig = {
         fitModel: 'entire-view'
     },
     plugins: [
-        Taucharts.api.plugins.get('tooltip')()
+        Taucharts.api.plugins.get('tooltip')(),
+        Taucharts.api.plugins.get('annotations')({
+            items: annotations
+        })
     ]
 };
 
