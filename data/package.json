@@ -1,0 +1,15 @@
+{
+  "name": "igra-viz-data-loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "refresh.js",
+  "scripts": {
+    "start": "node refresh.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tabletop": "^1.5.2"
+  }
+}
