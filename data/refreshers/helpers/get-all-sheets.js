@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 
 
-const sheetsNames = ['Серии', 'Игры', 'Составы', 'Раунды', 'Вопросы', 'Телезрители', 'Знатоки', 'Команды'];
+const sheetsNames = ['Серии', 'Игры', 'Составы', 'Раунды', 'Вопросы', 'Знатоки'];
 
 const getAllSheetsAsync = async () => {
     const sheets = {};
