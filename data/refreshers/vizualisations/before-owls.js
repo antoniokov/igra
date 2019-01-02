@@ -1,7 +1,5 @@
-const getAllSheetsAsync = require('../helpers/get-all-sheets').getAllSheetsAsync;
-
-const refresh = async () => {
-    const sheets = await getAllSheetsAsync();
+const refresh = async (sheets) => {
+    
 };
 
 module.exports.refresh = refresh;
