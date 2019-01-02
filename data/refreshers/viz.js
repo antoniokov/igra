@@ -1,4 +1,4 @@
-const getAllSheetsAsync = require('../helpers/get-all-sheets').getAllSheetsAsync;
+const getAllSheetsAsync = require('./helpers/get-all-sheets').getAllSheetsAsync;
 const refreshes = [
     require('./vizualisations/before-owls').refresh
 ];

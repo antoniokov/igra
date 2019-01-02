@@ -5,8 +5,8 @@ const firstPlayerOwls = SERIES
         if(!(player in result)) {
             const isBeforeTemplate = (player, season, series) => (row, playerField) =>
                 row[playerField] === player &&
-                row['Сезон'] <= season &&
-                SERIES_ORDER[row['Серия']] <= SERIES_ORDER[series];
+                (row['Сезон'] < season ||
+                (row['Сезон'] === season && SERIES_ORDER[row['Серия']] <= SERIES_ORDER[series]));
 
             const isBeforeFunction = isBeforeTemplate(player, s['Сезон'], s['Серия']);
 
@@ -17,8 +17,10 @@ const firstPlayerOwls = SERIES
 
             result[player] = Object.assign({}, s, {
                 before : {
+                    'Финалов': lineupsBefore.filter(l => l['Тип игры'] === 'Финал').length,
+                    'Выигранных финалов': lineupsBefore.filter(l => l['Тип игры'] === 'Финал' && l['Выиграл'] === 'Знатоки').length,
                     'Игр': lineupsBefore.length,
-                    'Побед': lineupsBefore.filter(g => g['Выиграл'] === 'Знатоки').length,
+                    'Побед': lineupsBefore.filter(l => l['Выиграл'] === 'Знатоки').length,
                     'Ответов': answersBefore.length,
                     'Правильных ответов': answersBefore.filter(a => a['Результат'] === 'Проиграл').length,
                     'Суперблицев': roundsBefore.filter(r => r['Тип'] === 'Суперблиц').length,
@@ -42,6 +44,10 @@ const measuresSplit = {
     'Игр': {
         '+': s => s['Побед'],
         '-': s => s['Игр'] - s['Побед']
+    },
+    'Финалов': {
+        '+': s => s['Выигранных финалов'],
+        '-': s => s['Финалов'] - s['Выигранных финалов']
     },
     'Призов лучшему знатоку': {
         '+': s => s['Призов лучшему знатоку'],

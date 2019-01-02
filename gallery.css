@@ -21,7 +21,7 @@ h2 {
     display: inline-block;
 }
 
-label {
+label, span {
     font-family: "Open Sans", sans-serif;
     font-size: 0.9em;
 }
