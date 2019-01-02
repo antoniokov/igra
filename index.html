@@ -57,14 +57,16 @@
 
     <h1>Знатоки</h1>
     <h2>Кому пришлось помучаться, чтобы получить хрустальную сову?</h2>
-    <label for="select-how-to-win-a-crystal-owl"></label>
-    <select id="select-how-to-win-a-crystal-owl" style="display: block">
-        <option selected value="Ответов">Ответы</option>
-        <option value="Игр">Игры</option>
-        <option value="Призов лучшему знатоку">Призы лучшему знатоку игры</option>
-        <option value="Суперблицев">Суперблицы</option>
-        <option value="Решающих раундов">Решающие раунды</option>
-    </select>
+    <div>
+        <label for="select-how-to-win-a-crystal-owl">Больше всего</label>
+        <select id="select-how-to-win-a-crystal-owl">
+            <option selected value="Ответов">правильных ответов</option>
+            <option value="Игр">побед</option>
+            <option value="Призов лучшему знатоку">призов лучшему знатоку</option>
+            <option value="Суперблицев">взятых суперблицев</option>
+            <option value="Решающих раундов">выигранных решающих раундов</option>
+        </select>
+    </div>
     <div id="chart-how-to-win-a-crystal-owl" style="width: 900px; height: 500px"></div>
     <script type='text/javascript' src='./taucharts/how-to-win-a-crystal-owl.js'></script>
 

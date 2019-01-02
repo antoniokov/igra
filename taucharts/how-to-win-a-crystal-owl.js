@@ -67,8 +67,13 @@ const statsBeforeOwl = Object.keys(firstPlayerOwls).reduce((result, p) => {
 }, []);
 
 const defaultMeasure = 'Ответов';
-const sortingFunctionTemplate = measure => (p1, p2) =>
-    firstPlayerOwls[p1['Знаток']].before[measure] - firstPlayerOwls[p2['Знаток']].before[measure];
+const sortingFunctionTemplate = measure => {
+    const getPluses = p => measuresSplit[measure]['+'](firstPlayerOwls[p].before);
+    return (s1, s2) => {
+        const difference = getPluses(s2['Знаток']) - getPluses(s1['Знаток']);
+        return difference || (firstPlayerOwls[s2['Знаток']].before[measure] - firstPlayerOwls[s1['Знаток']].before[measure]);
+    }
+};
 
 statsBeforeOwl.sort(sortingFunctionTemplate(defaultMeasure));
 

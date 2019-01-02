@@ -21,6 +21,11 @@ h2 {
     display: inline-block;
 }
 
+label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.9em;
+}
+
 .instagram-logo {
     width: 16px;
     height: 16px;
