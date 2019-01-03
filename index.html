@@ -21,15 +21,6 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/taucharts@2/dist/taucharts.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/taucharts@2/dist/taucharts.min.css">
-
-
-    <script type='text/javascript' src='data/raw/games.js'></script>
-    <script type='text/javascript' src='data/raw/series.js'></script>
-    <script type='text/javascript' src='data/raw/lineups.js'></script>
-    <script type='text/javascript' src='data/raw/questions.js'></script>
-    <script type='text/javascript' src='data/raw/rounds.js'></script>
-    <script type='text/javascript' src='data/refreshers/helpers/series-order.js'></script>
-    <script type='text/javascript' src='./wins-losses/js/process.js'></script>
 </head>
 <body>
     <h1>Команды</h1>
@@ -53,40 +44,30 @@
         <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
     </a>
     <div id="chart-winning-percentage-by-seasons" style="width: 900px; height: 500px"></div>
-    <script type='text/javascript' src='./taucharts/winning-percentage-by-seasons.js'></script>
+    <script type='text/javascript' src='taucharts/games/winning-percentage-by-seasons.js'></script>
 
     <h1>Знатоки</h1>
     <h2>Кому пришлось помучаться, чтобы получить хрустальную сову?</h2>
     <div>
-        <label for="select-how-to-win-a-crystal-owl">Больше всего</label>
-        <select id="select-how-to-win-a-crystal-owl">
-            <option selected value="Ответов">правильных ответов</option>
-            <option value="Игр">побед</option>
-            <option value="Финалов">выигранных финалов</option>
-            <option value="Призов лучшему знатоку">призов лучшему знатоку</option>
-            <option value="Суперблицев">взятых суперблицев</option>
-            <option value="Решающих раундов">выигранных решающих раундов</option>
+        <label for="select-before-owl">Больше всего</label>
+        <select id="select-before-owl">
+
         </select>
         <span>до получения первой совы</span>
     </div>
-    <div id="chart-how-to-win-a-crystal-owl" style="width: 900px; height: 500px"></div>
-    <script type='text/javascript' src='./taucharts/how-to-win-a-crystal-owl.js'></script>
+    <div id="chart-before-owl" style="width: 900px; height: 500px"></div>
 
     <h2>Кому уже пора дать сову?</h2>
     <div>
-        <label for="select-how-not-to-win-a-crystal-owl">Больше всего</label>
-        <select id="select-how-not-to-win-a-crystal-owl">
-            <option selected value="Ответов">правильных ответов</option>
-            <option value="Игр">побед</option>
-            <option value="Финалов">выигранных финалов</option>
-            <option value="Призов лучшему знатоку">призов лучшему знатоку</option>
-            <option value="Суперблицев">взятых суперблицев</option>
-            <option value="Решающих раундов">выигранных решающих раундов</option>
+        <label for="select-without-owl">Больше всего</label>
+        <select id="select-without-owl">
+
         </select>
         <span>и нет совы</span>
     </div>
-    <div id="chart-how-not-to-win-a-crystal-owl" style="width: 900px; height: 500px"></div>
-    <script type='text/javascript' src='./taucharts/how-not-to-win-a-crystal-owl.js'></script>
+    <div id="chart-without-owl" style="width: 900px; height: 500px"></div>
 
+
+    <script type='text/javascript' src='taucharts/players/owls.js'></script>
 </body>
 </html>

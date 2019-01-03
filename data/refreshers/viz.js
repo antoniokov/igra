@@ -1,7 +1,7 @@
 const getAllSheetsAsync = require('./helpers/get-all-sheets').getAllSheetsAsync;
 const saveToFileAsync = require('./helpers/save-to-file');
 const vizualisations = [
-    { name: 'before-owl', refresh: require('./vizualisations/before-owl').refresh }
+    { name: 'before-owl', refresh: require('./visualizations/before-owl').refresh }
 ];
 
 
