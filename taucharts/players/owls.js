@@ -7,10 +7,15 @@ const owlMeasures = [
     { id: 'Решающих раундов', label: 'выигранных решающих раундов' }
 ];
 
+const datasources = [
+    { id: 'before-owl', url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/before-owl.json' },
+    { id: 'players', url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/raw/%D0%97%D0%BD%D0%B0%D1%82%D0%BE%D0%BA%D0%B8.json' }
+];
+
 const visualizations = [
     {
         id: 'before-owl',
-        datasource: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/before-owl.json',
+        datasource: 'before-owl',
         measures: owlMeasures,
         calculateAnnotations: (dataTransformed) => {
             const dataPluses = dataTransformed.filter(s => s['Результат'] === '+');
@@ -28,7 +33,7 @@ const visualizations = [
     },
     {
         id: 'without-owl',
-        datasource: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/raw/%D0%97%D0%BD%D0%B0%D1%82%D0%BE%D0%BA%D0%B8.json',
+        datasource: 'players',
         preFilter: (row) => row['Малых сов'] + row['Больших сов'] === 0 && row['Только в благотворительных'] !== 'Да',
         measures: owlMeasures,
         top: 24,
@@ -54,6 +59,19 @@ const visualizations = [
             withoutOwl.config.plugins.push(Taucharts.api.plugins.get('annotations')({ items: annotations }));
             withoutOwl.chart.updateConfig(withoutOwl.config);
         }
+    },
+    {
+        id: 'best-players',
+        datasource: 'players',
+        preFilter: (row) => row['Только в благотворительных'] !== 'Да',
+        measures: [...owlMeasures,
+            { id: 'Досрочных', label: 'досрочных ответов' },
+            { id: 'Процент правильных', label: '% правильных ответов' },
+            { id: 'Ответов за игру', label: 'правильных ответов за игру' },
+            { id: 'Команд', label: 'разных команд' }
+
+            ],
+        top: 24
     }
 ];
 
@@ -63,7 +81,11 @@ const measureToPlus = {
     'Финалов': 'Выигранных финалов',
     'Призов лучшему знатоку': 'Призов лучшему знатоку',
     'Суперблицев': 'Взятых суперблицев',
-    'Решающих раундов': 'Взятых решающих раундов'
+    'Решающих раундов': 'Взятых решающих раундов',
+    'Команд': 'Команд',
+    'Процент правильных': 'Процент правильных',
+    'Досрочных': 'Правильных досрочных',
+    'Ответов за игру': 'Правильных ответов за игру'
 };
 
 const splitMeasure = (measure, sign, row) => {
@@ -83,8 +105,13 @@ const getSortedTop = (dataTransformed, sortingFunction, top = null) => {
     return top ? sorted.slice(0, top*2) : sorted;
 };
 
-const visualizeAll = visualizations.map(async (v) => {
-    const data = await d3.json(v.datasource);
+const loadAllAsync = datasources.map(async (ds) => {
+    const data = await d3.json(ds.url);
+    return { id: ds.id, data: data }
+});
+
+const visualizeAll = datasets => visualizations.map((v) => {
+    const data = datasets[v.datasource];
     const dataFiltered = v.preFilter ? data.filter(v.preFilter) : data;
 
     const dataTransformed = dataFiltered.reduce((result, row) => {
@@ -119,7 +146,7 @@ const visualizeAll = visualizations.map(async (v) => {
             showGridLines: ''
         },
         settings: {
-            fitModel: 'entire-view'
+            fitModel: 'fit-width'
         },
         plugins: [
             Taucharts.api.plugins.get('tooltip')()
@@ -156,5 +183,10 @@ const visualizeAll = visualizations.map(async (v) => {
     return v;
 });
 
-Promise.all(visualizeAll)
-    .then(results => visualizations.forEach(v => v.postRender && v.postRender(results)));
+
+Promise.all(loadAllAsync)
+    .then(results => {
+        const datasets = results.reduce((obj, r) => Object.assign(obj, { [r.id]: r.data }), {});
+        const visuals = visualizeAll(datasets);
+        visualizations.forEach(v => v.postRender && v.postRender(visuals));
+    });
