@@ -63,7 +63,7 @@ const visualizations = [
     {
         id: 'best-players',
         datasource: 'players',
-        preFilter: (row) => row['Только в благотворительных'] !== 'Да',
+        preFilter: (row) => row['Только в благотворительных'] !== 'Да' && row['Игр'] >= 5,
         measures: [...owlMeasures,
             { id: 'Досрочных', label: 'досрочных ответов' },
             { id: 'Процент правильных', label: '% правильных ответов' },
