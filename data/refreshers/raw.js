@@ -8,6 +8,10 @@ const refreshRaw = callback => {
         date: {
             parse: d => new Date(...d.split('.').reverse()),
             fields: ['Дата']
+        },
+        percent: {
+            parse: d => parseFloat(d),
+            fields: ['Процент правильных']
         }
     };
 
