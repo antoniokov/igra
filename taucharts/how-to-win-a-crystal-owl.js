@@ -22,11 +22,11 @@ const firstPlayerOwls = SERIES
                     'Игр': lineupsBefore.length,
                     'Побед': lineupsBefore.filter(l => l['Выиграл'] === 'Знатоки').length,
                     'Ответов': answersBefore.length,
-                    'Правильных ответов': answersBefore.filter(a => a['Результат'] === 'Проиграл').length,
+                    'Правильных': answersBefore.filter(a => a['Результат'] === 'Проиграл').length,
                     'Суперблицев': roundsBefore.filter(r => r['Тип'] === 'Суперблиц').length,
                     'Взятых суперблицев': roundsBefore.filter(r => r['Тип'] === 'Суперблиц' && r['Выиграли'] === 'Знатоки').length,
                     'Решающих раундов': roundsBefore.filter(r => r['РР'] === 'РР').length,
-                    'Выигранных решающих раундов': roundsBefore.filter(r => r['РР'] === 'РР' && r['Выиграли'] === 'Знатоки').length,
+                    'Взятых решающих раундов': roundsBefore.filter(r => r['РР'] === 'РР' && r['Выиграли'] === 'Знатоки').length,
                     'Призов лучшему знатоку': bestPlayersBefore.length
                 }
             });
@@ -38,8 +38,8 @@ const firstPlayerOwls = SERIES
 
 const measuresSplit = {
     'Ответов': {
-        '+': s => s['Правильных ответов'],
-        '-': s => s['Ответов'] - s['Правильных ответов']
+        '+': s => s['Правильных'],
+        '-': s => s['Ответов'] - s['Правильных']
     },
     'Игр': {
         '+': s => s['Побед'],
@@ -58,8 +58,8 @@ const measuresSplit = {
         '-': s => s['Суперблицев'] - s['Взятых суперблицев']
     },
     'Решающих раундов': {
-        '+': s => s['Выигранных решающих раундов'],
-        '-': s => s['Решающих раундов'] - s['Выигранных решающих раундов']
+        '+': s => s['Взятых решающих раундов'],
+        '-': s => s['Решающих раундов'] - s['Взятых решающих раундов']
     }
 };
 const statsBeforeOwl = Object.keys(firstPlayerOwls).reduce((result, p) => {

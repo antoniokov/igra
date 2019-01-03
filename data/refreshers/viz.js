@@ -1,12 +1,13 @@
 const getAllSheetsAsync = require('./helpers/get-all-sheets').getAllSheetsAsync;
-const refreshes = [
-    require('./vizualisations/before-owls').refresh
+const saveToFileAsync = require('./helpers/save-to-file');
+const vizualisations = [
+    { name: 'before-owl', refresh: require('./vizualisations/before-owl').refresh }
 ];
 
 
 const refreshViz = async () => {
     const sheets = await getAllSheetsAsync();
-    refreshes.forEach(r => r(sheets));
+    return Promise.all(vizualisations.map(v => saveToFileAsync(`./viz/${v.name}.json`, v.refresh(sheets))));
 };
 
 module.exports = refreshViz;

@@ -4,3 +4,5 @@ const SERIES_ORDER = {
     "Осень": 3,
     "Зима": 4
 };
+
+module.exports = SERIES_ORDER;

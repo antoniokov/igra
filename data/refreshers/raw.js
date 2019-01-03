@@ -1,5 +1,5 @@
 const tabletop = require('tabletop');
-const fs = require('fs').promises;
+const saveToFileAsync = require('./helpers/save-to-file');
 const sheetsNames = require('./helpers/get-all-sheets').sheetsNames;
 const publicSpreadsheetUrl = '1eo10PIQrAZcXUxCObB2KQeAnkM7BrKo2Q9NmzxPieBU';
 
@@ -24,9 +24,8 @@ const refreshRaw = callback => {
         },
         wanted: sheetsNames,
         callback: sheets => {
-            return Promise.all(Object.keys(sheets).map(s => {
-                fs.writeFile(`./raw/${s}.json`, JSON.stringify(sheets[s].elements), 'utf8');
-            })).then(callback);
+            return Promise.all(Object.keys(sheets).map(s => saveToFileAsync(`./raw/${s}.json`, sheets[s].elements)))
+                .then(callback);
         }
     });
 };
