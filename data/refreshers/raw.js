@@ -9,9 +9,9 @@ const refreshRaw = callback => {
             parse: d => new Date(...d.split('.').reverse()),
             fields: ['Дата']
         },
-        percent: {
-            parse: d => parseFloat(d),
-            fields: ['Процент правильных']
+        float: {
+            parse: d => typeof d === 'string' ? +parseFloat(d.replace(',', '.')).toFixed(2) : d,
+            fields: ['Процент правильных', 'Ответов за игру', 'Правильных ответов за игру']
         }
     };
 
@@ -19,12 +19,14 @@ const refreshRaw = callback => {
         key: publicSpreadsheetUrl,
         parseNumbers: true,
         postProcess: row => {
-            Object.keys(meta).forEach(type =>
+            Object.keys(meta).forEach(type => {
                 meta[type].fields
-                    .map(field => field.toLowerCase().replace(' ', ''))
+                    .map(field => field.toLowerCase().replace(/ /g, ''))
                     .filter(field => field in row)
-                    .forEach(field => row[field] = meta[type].parse(row[field]))
-            );
+                    .forEach(field => {
+                        row[field] = meta[type].parse(row[field])
+                    })
+            });
         },
         wanted: sheetsNames,
         callback: sheets => {
