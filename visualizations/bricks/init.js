@@ -6,8 +6,7 @@ import drawBricks from './js/draw-bricks.js';
 import drawLegend from './js/draw-legend.js';
 
 const sortingFunctions = {
-    gamesCount: (a, b) => b['Игр'] - a['Игр'],
-    winningPercentage: (a, b) => parseFloat(b['Побед'])/b['Игр'] - parseFloat(a['Побед'])/a['Игр']
+    'Процент побед': (a, b) => parseFloat(b['Побед'])/b['Игр'] - parseFloat(a['Побед'])/a['Игр']
 };
 
 
@@ -22,23 +21,29 @@ loadBatchAsync(['teams', 'games'])
 
 
         const nodes = document.getElementsByClassName('bricks');
-        [...nodes].map(n => n.id).forEach(id => {
-            buildSkeleton(id);
+        [...nodes].forEach(n => {
+            buildSkeleton(n.id);
 
-            const sortBy = id === 'basic' ? 'winningPercentage' : 'gamesCount';
-            teams.sort(sortingFunctions[sortBy]);
-            drawTable(teams, id);
+            const sortBy = n.dataset.sortBy || 'Процент побед';
+            const sortingFunction = sortingFunctions[sortBy] || ((a, b) => b[sortBy] - a[sortBy]);
+            teams.sort(sortingFunction);
 
-            if (id === 'basic') {
-                drawBricks(teams, id);
-            } else {
-                const seasons = [...new Set(dataSets.games.map(g => g['Сезон']))];
-                seasons.forEach(s => {
-                    const seasonTeams = teams.map(t => Object.assign({}, t, { 'Игры': t['Игры'].filter(g => g['Сезон'] === s) } ));
-                    drawBricks(seasonTeams, id, { header: s + 2008 })
+            drawTable(teams, n.id);
+
+            if (n.dataset.groupBy) {
+                const groups = [...new Set(dataSets.games.map(g => g[n.dataset.groupBy]))];
+
+                groups.forEach(group => {
+                    const groupTeams = teams
+                        .map(t => Object.assign({}, t, { 'Игры': t['Игры'].filter(g => g[n.dataset.groupBy] === group) } ));
+
+                    const header = n.dataset.groupBy === 'Сезон' ? group + 2008 : group;
+                    drawBricks(groupTeams, n.id, { header: header })
                 });
+            } else {
+                drawBricks(teams, n.id);
             }
 
-            drawLegend(id);
+            drawLegend(n.id);
         });
     });
