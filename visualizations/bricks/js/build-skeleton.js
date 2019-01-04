@@ -29,6 +29,7 @@ export default function buildSkeleton (id) {
     ['left', 'right'].forEach(side => {
         container.append('div')
             .attr('id', `${side}-${id}`)
+            .attr('class', side)
     });
 
     container.append('div');
