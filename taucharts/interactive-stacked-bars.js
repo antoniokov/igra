@@ -1,5 +1,6 @@
-import { measures, measureToPlus } from './helpers/measures.js';
-import dataSources from './helpers/data-sources.js'
+import { measures, measureToPlus } from '../helpers/measures.js';
+import dataSources from '../helpers/data-sources.js'
+import { loadBatchAsync } from '../helpers/load.js'
 
 import beforeOwl from './players/before-owl.js';
 import withoutOwl from './players/without-owl.js';
@@ -24,15 +25,8 @@ const getSortedTop = (dataTransformed, sortingFunction, top = null) => {
     return top ? sorted.slice(0, top*2) : sorted;
 };
 
-const loadAllAsync = dataSources
-    .filter(ds => visualizations.some(v => v.dataSource === ds.id))
-    .map(async (ds) => {
-        const data = await d3.json(ds.url);
-        return { id: ds.id, data: data }
-    });
 
-const visualizeAll = (dataSets) => visualizations.map((v) => {
-    const data = dataSets[v.dataSource];
+const visualize = (data, v) => {
     const dataFiltered = v.preFilter ? data.filter(v.preFilter) : data;
     v.measures = measures.filter(m => !v.measuresWhiteList || v.measuresWhiteList.includes(m.id));
 
@@ -103,12 +97,11 @@ const visualizeAll = (dataSets) => visualizations.map((v) => {
     });
 
     return v;
-});
+};
 
-
-Promise.all(loadAllAsync)
-    .then(results => {
-        const dataSets = results.reduce((obj, r) => Object.assign(obj, { [r.id]: r.data }), {});
-        const visuals = visualizeAll(dataSets);
-        visualizations.forEach(v => v.postRender && v.postRender(visuals));
+const relevantDataSources = dataSources.filter(ds => visualizations.some(v => v.dataSource === ds.id));
+loadBatchAsync(relevantDataSources)
+    .then(dataSets => {
+        const rendered = visualizations.map(v => visualize(dataSets[v.dataSource], v));
+        visualizations.forEach(v => v.postRender && v.postRender(rendered));
     });

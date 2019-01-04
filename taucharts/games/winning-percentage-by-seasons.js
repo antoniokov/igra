@@ -1,7 +1,6 @@
-import addMinMaxLabels from '../helpers/add-min-max-labels.js';
+import addMinMaxLabels from '../../helpers/add-min-max-labels.js';
+import { loadAsync } from '../../helpers/load.js';
 
-
-const loadAsync = async (path) => await d3.json(path);
 
 loadAsync('https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/winning-percentage-by-seasons.json')
     .then(winningPercentageBySeasons => {

@@ -8,6 +8,7 @@ const label = {
             'Осень': 'осени',
         }[game['Серия']];
 
+        console.log(game);
         return `${typeLabel} ${seriesLabel}, ${game['Дата'].getFullYear()}`;
     },
 
