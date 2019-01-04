@@ -17,7 +17,7 @@ export default [
     },
     {
         id: 'teams',
-        url: 'https://github.com/antoniokov/igra/blob/master/data/raw/%D0%9A%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B.json',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/raw/%D0%9A%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B.json',
         postProcess: teams => teams.filter(t => t['Команда'])
     },
     {
