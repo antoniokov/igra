@@ -1,4 +1,6 @@
 import { loadBatchAsync } from '../../helpers/load.js';
+
+import buildSkeleton from './js/build-skeleton.js'
 import drawTable from './js/draw-table.js';
 import drawBricks from './js/draw-bricks.js';
 import drawLegend from './js/draw-legend.js';
@@ -21,6 +23,8 @@ loadBatchAsync(['teams', 'games'])
 
         const nodes = document.getElementsByClassName('bricks');
         [...nodes].map(n => n.id).forEach(id => {
+            buildSkeleton(id);
+
             const sortBy = id === 'basic' ? 'winningPercentage' : 'gamesCount';
             teams.sort(sortingFunctions[sortBy]);
             drawTable(teams, id);
