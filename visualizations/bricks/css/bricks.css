@@ -1,10 +1,10 @@
-.bricks td {
+.bricks .right td {
     width: 14px;
     padding-right: 0;
     padding-left: 0;
 }
 
-.result {
+.bricks .result {
     display: inline-block;
     vertical-align: middle;
     box-sizing: border-box;
@@ -14,30 +14,30 @@
     background-color: #9E9E9E;
 }
 
-a.result:hover {
+.bricks a.result:hover {
     box-shadow: 0 0 2px black;
 }
 
-.result.win {
+.bricks .result.win {
     background-color: #206925;
 }
 
-.all-in {
+.bricks .all-in {
     border-right: solid 2px #717171;
 }
 
-.all-in.win {
+.bricks .all-in.win {
     border-right: solid 2px black;
 }
 
-.series-final {
+.bricks .bricks-block .series-final {
     border-bottom: solid 2px #E2E200;
 }
 
-.year-final {
+.bricks .year-final {
     border-bottom: solid 2px #09A6DA;
 }
 
-table.bricks {
+.bricks table.bricks-block {
     margin-right: 8px;
 }

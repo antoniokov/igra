@@ -1,5 +1,5 @@
-export default function drawTable (teams) {
-    const table = d3.select('#left')
+export default function drawTable (teams, id) {
+    const table = d3.select(`#left-${id}`)
         .append('table')
         .attr('class', 'left');
 

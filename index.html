@@ -6,6 +6,11 @@
 
     <link rel="stylesheet" type="text/css" href="gallery.css">
 
+    <link rel="stylesheet" type="text/css" href="visualizations/bricks/css/table.css">
+    <link rel="stylesheet" type="text/css" href="visualizations/bricks/css/bricks.css">
+    <link rel="stylesheet" type="text/css" href="visualizations/bricks/css/legend.css">
+    <link rel="stylesheet" type="text/css" href="visualizations/bricks/css/tooltip.css">
+
     <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -25,18 +30,43 @@
 <body>
     <h1>Команды</h1>
 
-    <!-- Replace iframes with divs + declarative API -->
     <h2>По проценту побед</h2>
     <a href="https://www.instagram.com/p/BkxQpMSn_F1" target="_blank">
         <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
     </a>
-    <iframe src="visualizations/bricks/index.html" width="1300" height="570" scrolling="no"></iframe>
+    <div id="basic" class="bricks grid-container">
+        <div id="bricks-tooltip-basic" class="tooltip">
+            <h3 id="bricks-tooltip-name-basic">Отборочная игра весны, 2015</h3>
+            <p>Команда: <span id="bricks-tooltip-team-basic">Александра Курзинера</span></p>
+            <p>Счёт: <span id="bricks-tooltip-result-basic">6:5</span></p>
+            <p>Лучший игрок: <span id="bricks-tooltip-best-player-basic">Денис Сулавко</span></p>
+        </div>
+        <div id="left-basic" class="left"></div>
+        <div id="right-basic" class="right"></div>
+        <div></div>
+        <div></div>
+        <div id="legend-basic" class="legend"></div>
+    </div>
 
     <h2>По количеству игр</h2>
     <a href="https://www.instagram.com/p/Bk27xhEHc9s" target="_blank">
         <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
     </a>
-    <iframe src="visualizations/bricks/seasons/index.html" width="1300" height="570" scrolling="no"></iframe>
+
+    <div id="seasons" class="bricks grid-container">
+        <div id="bricks-tooltip-seasons" class="tooltip">
+            <h3 id="bricks-tooltip-name-seasons">Отборочная игра весны, 2015</h3>
+            <p>Команда: <span id="bricks-tooltip-team-seasons">Александра Курзинера</span></p>
+            <p>Счёт: <span id="bricks-tooltip-result-seasons">6:5</span></p>
+            <p>Лучший игрок: <span id="bricks-tooltip-best-player-seasons">Денис Сулавко</span></p>
+        </div>
+        <div id="left-seasons" class="left"></div>
+        <div id="right-seasons" class="right"></div>
+        <div></div>
+        <div></div>
+        <div id="legend-seasons" class="legend"></div>
+    </div>
+
 
     <h1>Игры</h1>
     <h2>Процент побед знатоков по сезонам</h2>
@@ -77,6 +107,11 @@
     </div>
     <div id="chart-without-owl" style="width: 900px; height: 500px"></div>
 
+
+
+
+
+    <script type='module' src='visualizations/bricks/init.js'></script>
     <script type="module" src='visualizations/interactive-stacked-bars/init.js'></script>
 </body>
 </html>

@@ -1,39 +1,39 @@
-#legend {
+.bricks .legend {
     min-width: 300px;
 }
 
 
-#legend > div {
+.bricks .legend > div {
     display: inline-block;
 }
 
-#legend .result {
+.bricks .legend .result {
     background-color: transparent;
     width: 12px;
     height: 12px;
     vertical-align: middle;
 }
 
-.encoding {
+.bricks .encoding {
     padding-right: 8px;
 }
 
-.legend-label {
+.bricks .legend-label {
     font-size: 11px;
 }
 
-#legend-all-in {
+.bricks .legend-all-in {
     padding-right: 4px;
     border-right: solid 2px #717171;
     border-radius: 2px;
 }
 
-#legend-series-final {
+.bricks .legend-series-final {
     border-bottom: solid 2px #E2E200;
     border-radius: 2px;
 }
 
-#legend-year-final {
+.bricks .legend-year-final {
     border-bottom: solid 2px #09A6DA;
     border-radius: 2px;
 }

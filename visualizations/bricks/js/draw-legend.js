@@ -1,5 +1,5 @@
-export default function drawLegend() {
-    const legend = d3.select('#legend');
+export default function drawLegend(id) {
+    const legend = d3.select(`#legend-${id}`);
 
     const encodings = [
         { id: 'series-final', label: 'финал серии' },
@@ -13,7 +13,6 @@ export default function drawLegend() {
         .attr('class', 'encoding');
 
     divs.append('span')
-        .attr('id', e => `legend-${e.id}`)
-        .attr('class', 'legend-label')
+        .attr('class', e => `legend-label legend-${e.id}`)
         .text(e => e.label);
 }

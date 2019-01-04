@@ -1,57 +1,57 @@
-body {
+.bricks td, .bricks th, .bricks span {
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
     color: #666666;
     margin: 0;
 }
 
-table {
+.bricks table {
     float: left;
 }
 
-.left td, .left th {
+.bricks .left td, .bricks .left th {
     padding-right: 8px;
     white-space: nowrap;
 }
 
-th {
+.bricks th {
     height: 18px;
 }
 
-td {
+.bricks td {
     height: 24px;
 }
 
-tr {
+.bricks tr {
     height: 26px;
 }
 
-.wins, .losses, .percentage {
+.bricks .wins, .bricks .losses, .bricks .percentage {
     text-align: right;
 }
 
-.name {
+.bricks .name {
     text-align: left;
 }
 
-td.wins {
+.bricks td.wins {
     color: #206925;
     font-weight: 500;
 }
 
-td.losses {
+.bricks td.losses {
     color: #9E9E9E;
     font-weight: 500;
 }
 
-.grid-container {
+.bricks.grid-container {
     display: grid;
-    grid-template-columns: min-content min-content;
+    grid-template-columns: 0 min-content min-content;
     grid-column-gap: 0;
     grid-row-gap: 8px;
     align-items: start;
 }
 
-#right {
+.bricks .right {
     display: inline-flex;
 }

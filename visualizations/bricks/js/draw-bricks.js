@@ -1,12 +1,15 @@
+import { showTooltip, hideTooltip } from './tooltip.js';
+
+
 const differenceToOpacity = d3.scaleLinear()
     .domain([0, 6])
     .range([0.3, 1.0]);
 
 
-export default function drawBricks (teams, config = {}) {
-    const table = d3.select('#right')
+export default function drawBricks (teams, id, config = {}) {
+    const table = d3.select(`#right-${id}`)
         .append('table')
-            .attr('class', 'bricks');
+            .attr('class', 'bricks-block');
 
     const mostGames = Math.max(...teams.map(t => t['Игры'].length));
     const thead = table.append('thead');
@@ -33,6 +36,6 @@ export default function drawBricks (teams, config = {}) {
         .classed('year-final', g => g['Тип'] === 'Финал' && g['Серия'] === 'Зима')
         .classed('all-in', g => g['РР'] === 'РР')
         .style('opacity', g => differenceToOpacity(Math.abs(g['Знатоки'] - g['Телезрители'])))
-        .on('mouseover', showTooltip)
-        .on('mouseout', hideTooltip);
+        .on('mouseover', e => showTooltip(e, id))
+        .on('mouseout', e => hideTooltip(id));
 }
