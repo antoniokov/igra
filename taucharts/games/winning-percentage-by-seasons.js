@@ -2,7 +2,7 @@ import addMinMaxLabels from '../../helpers/add-min-max-labels.js';
 import { loadAsync } from '../../helpers/load.js';
 
 
-loadAsync('https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/winning-percentage-by-seasons.json')
+loadAsync('winning-percentage')
     .then(winningPercentageBySeasons => {
         const formatFunction = n => `${Math.round(100.0*n)}%`;
         const winningPercentageBySeasonsLabeled = addMinMaxLabels(winningPercentageBySeasons, 'winningPercentage', formatFunction);

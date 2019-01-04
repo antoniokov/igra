@@ -1,5 +1,4 @@
 import { measures, measureToPlus } from '../helpers/measures.js';
-import dataSources from '../helpers/data-sources.js'
 import { loadBatchAsync } from '../helpers/load.js'
 
 import beforeOwl from './players/before-owl.js';
@@ -99,8 +98,8 @@ const visualize = (data, v) => {
     return v;
 };
 
-const relevantDataSources = dataSources.filter(ds => visualizations.some(v => v.dataSource === ds.id));
-loadBatchAsync(relevantDataSources)
+const dataSourcesIds = [...new Set(visualizations.map(v => v.dataSource))];
+loadBatchAsync(dataSourcesIds)
     .then(dataSets => {
         const rendered = visualizations.map(v => visualize(dataSets[v.dataSource], v));
         visualizations.forEach(v => v.postRender && v.postRender(rendered));

@@ -1,9 +1,15 @@
+import dataSources from './data-sources.js';
+
+
 const dateFields = ['Дата'];
 
 
-export async function loadAsync (path) {
-    const data = await d3.json(path);
-    return data.map(d => {
+export async function loadAsync (dataSourceId) {
+    const source = dataSources.filter(ds => ds.id === dataSourceId)[0];
+
+    const data = await d3.json(source.url);
+    const dataPostProcessed = source.postProcess ? source.postProcess(data) : data;
+    return dataPostProcessed.map(d => {
         dateFields
             .filter(f => f in d)
             .forEach(f => d[f] = new Date(d[f]));
@@ -11,12 +17,13 @@ export async function loadAsync (path) {
     });
 }
 
-export async function loadBatchAsync (dataSources) {
+export async function loadBatchAsync (dataSourceIds) {
     const load = async (ds) => {
-        const data = await loadAsync(ds.url);
+        const data = await loadAsync(ds.id);
         return { [ds.id]: data };
     };
 
-    return Promise.all(dataSources.map(ds => load(ds)))
+    const sources = dataSources.filter(ds => dataSourceIds.includes(ds.id));
+    return Promise.all(sources.map(ds => load(ds)))
         .then(results => results.reduce((merged, obj) => Object.assign(merged, obj), {}))
 }
