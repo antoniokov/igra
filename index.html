@@ -30,13 +30,13 @@
     <a href="https://www.instagram.com/p/BkxQpMSn_F1" target="_blank">
         <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
     </a>
-    <iframe src="bricks/index.html" width="1300" height="570" scrolling="no"></iframe>
+    <iframe src="visualizations/bricks/index.html" width="1300" height="570" scrolling="no"></iframe>
 
     <h2>По количеству игр</h2>
     <a href="https://www.instagram.com/p/Bk27xhEHc9s" target="_blank">
         <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
     </a>
-    <iframe src="bricks/seasons/index.html" width="1300" height="570" scrolling="no"></iframe>
+    <iframe src="visualizations/bricks/seasons/index.html" width="1300" height="570" scrolling="no"></iframe>
 
     <h1>Игры</h1>
     <h2>Процент побед знатоков по сезонам</h2>
@@ -44,11 +44,11 @@
         <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
     </a>
     <div id="chart-winning-percentage-by-seasons" style="width: 900px; height: 500px"></div>
-    <script type='module' src='taucharts/games/winning-percentage-by-seasons.js'></script>
+    <script type='module' src='visualizations/taucharts/winning-percentage-by-seasons.js'></script>
 
     <h1>Знатоки</h1>
     <h2>Лидеры</h2>
-    <div>
+    <div id="best-players" class="interactive-stacked-bars">
         <label for="select-best-players">Больше всего</label>
         <select id="select-best-players">
 
@@ -58,7 +58,7 @@
     <div id="chart-best-players" style="width: 900px; height: 500px"></div>
 
     <h2>Кому пришлось помучаться, чтобы получить хрустальную сову?</h2>
-    <div>
+    <div id="before-owl" class="interactive-stacked-bars">
         <label for="select-before-owl">Больше всего</label>
         <select id="select-before-owl">
 
@@ -68,7 +68,7 @@
     <div id="chart-before-owl" style="width: 900px; height: 500px"></div>
 
     <h2>Кому уже пора дать сову?</h2>
-    <div>
+    <div id="without-owl" class="interactive-stacked-bars">
         <label for="select-without-owl">Больше всего</label>
         <select id="select-without-owl">
 
@@ -77,6 +77,6 @@
     </div>
     <div id="chart-without-owl" style="width: 900px; height: 500px"></div>
 
-    <script type="module" src='taucharts/interactive-stacked-bars.js'></script>
+    <script type="module" src='visualizations/interactive-stacked-bars/init.js'></script>
 </body>
 </html>

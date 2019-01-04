@@ -1,4 +1,4 @@
-import { loadAsync } from '../../helpers/load.js';
+import { loadAsync } from '../../../helpers/load.js';
 
 loadAsync('games')
     .then(games => {

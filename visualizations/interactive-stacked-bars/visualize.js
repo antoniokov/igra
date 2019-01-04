@@ -1,11 +1,4 @@
-import { measures, measureToPlus } from '../helpers/measures.js';
-import { loadBatchAsync } from '../helpers/load.js'
-
-import beforeOwl from './players/before-owl.js';
-import withoutOwl from './players/without-owl.js';
-import bestPlayers from './players/best-players.js';
-
-const visualizations = [ beforeOwl, withoutOwl, bestPlayers ];
+import { measures, measureToPlus } from '../../helpers/measures.js';
 
 const splitMeasure = (measure, sign, row) => {
     const plus = row[measureToPlus[measure]];
@@ -98,9 +91,4 @@ const visualize = (data, v) => {
     return v;
 };
 
-const dataSourcesIds = [...new Set(visualizations.map(v => v.dataSource))];
-loadBatchAsync(dataSourcesIds)
-    .then(dataSets => {
-        const rendered = visualizations.map(v => visualize(dataSets[v.dataSource], v));
-        visualizations.forEach(v => v.postRender && v.postRender(rendered));
-    });
+export default visualize;
