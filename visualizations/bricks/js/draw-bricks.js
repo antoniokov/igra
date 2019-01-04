@@ -3,12 +3,12 @@ const differenceToOpacity = d3.scaleLinear()
     .range([0.3, 1.0]);
 
 
-function drawBricks(teams, config = {}) {
+export default function drawBricks (teams, config = {}) {
     const table = d3.select('#right')
         .append('table')
             .attr('class', 'bricks');
 
-    const mostGames = Math.max(...teams.map(t => t.games.length));
+    const mostGames = Math.max(...teams.map(t => t['Игры'].length));
     const thead = table.append('thead');
     thead.append('tr')
         .append('th')
@@ -21,7 +21,7 @@ function drawBricks(teams, config = {}) {
         .enter().append('tr');
 
     const cells = rows.selectAll('td')
-        .data(t => t.games)
+        .data(t => t['Игры'])
         .enter().append('td');
 
     const bricks = cells.append('a')

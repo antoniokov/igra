@@ -1,18 +1,32 @@
-import { loadAsync } from '../../../helpers/load.js';
+import { loadBatchAsync } from '../../../helpers/load.js';
+import drawTable from '../js/draw-table.js';
+import drawBricks from '../js/draw-bricks.js';
+import drawLegend from '../js/draw-legend.js';
 
-loadAsync('games')
-    .then(games => {
-        const teams = getTeams(games, { sort: 'gamesCount' });
+const sortingFunctions = {
+    gamesCount: (a, b) => b['Игр'] - a['Игр'],
+    winningPercentage: (a, b) => parseFloat(b['Побед'])/b['Игр'] - parseFloat(a['Побед'])/a['Игр']
+};
+
+
+loadBatchAsync(['teams', 'games'])
+    .then(dataSets => {
+        const teams = dataSets.teams
+            .filter(t => t['Только в благотворительных'] !== 'Да')
+            .map(t => Object.assign(t, {
+                'Игры': dataSets.games.filter(g => g['Команда'] === t['Команда']),
+                'Процент побед': (100*t['Побед']/t['Игр']).toFixed(1)
+            }));
+
+        console.log(teams);
+        teams.sort(sortingFunctions['gamesCount']);
+
         drawTable(teams);
 
-        const seasons = [...new Set(games.map(g => g['Сезон']))];
+        const seasons = [...new Set(dataSets.games.map(g => g['Сезон']))];
         seasons.forEach(s => {
-            const filteredTeams = teams.map(t => {
-                const team = Object.assign({}, t);
-                team.games = t.games.filter(g => g['Сезон'] === s);
-                return team;
-            });
-            drawBricks(filteredTeams, { header: s + 2008 })
+            const seasonTeams = teams.map(t => Object.assign({}, t, { 'Игры': t['Игры'].filter(g => g['Сезон'] === s) } ));
+            drawBricks(seasonTeams, { header: s + 2008 })
         });
         drawLegend();
     });

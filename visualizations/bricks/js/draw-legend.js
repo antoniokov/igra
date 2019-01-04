@@ -1,4 +1,4 @@
-function drawLegend() {
+export default function drawLegend() {
     const legend = d3.select('#legend');
 
     const encodings = [

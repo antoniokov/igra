@@ -1,20 +1,20 @@
-function drawTable(teams) {
+export default function drawTable (teams) {
     const table = d3.select('#left')
         .append('table')
         .attr('class', 'left');
 
     const columns = [
-        { id: 'name', label: 'Команда'},
-        { id: 'wins', label: '+' },
-        { id: 'losses', label: '−' },
-        { id: 'percentage', label: '%' },
+        { id: 'Команда', class: 'name', label: 'Команда'},
+        { id: 'Побед', class: 'wins', label: '+' },
+        { id: 'Поражений', class: 'losses', label: '−' },
+        { id: 'Процент побед', class: 'percentage', label: '%' },
     ];
     const thead = table.append('thead');
     thead.append('tr')
         .selectAll('th')
         .data(columns)
         .enter().append('th')
-        .attr('class', c => c.id)
+        .attr('class', c => c.class)
         .text(c => c.label);
 
     const tbody = table.append('tbody');
@@ -25,9 +25,10 @@ function drawTable(teams) {
     const cells = rows.selectAll('td')
         .data(t => columns.map(c => ({
             id: c.id,
+            class: c.class,
             label: t[c.id]
         })))
         .enter().append('td')
-        .attr('class', c => c.id)
+        .attr('class', c => c.class)
         .text(c => c.label);
 }
