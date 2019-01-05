@@ -30,8 +30,12 @@ const refreshRaw = callback => {
         },
         wanted: sheetsNames,
         callback: sheets => {
+            console.info('sheets downloaded');
             return Promise.all(Object.keys(sheets).map(s => saveToFileAsync(`./raw/${s}.json`, sheets[s].elements)))
-                .then(callback);
+                .then(() => {
+                    console.info('raw files saved');
+                    return callback()
+                });
         }
     });
 };
