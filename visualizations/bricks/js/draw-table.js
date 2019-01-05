@@ -1,14 +1,18 @@
-export default function drawTable (teams, id) {
-    const table = d3.select(`#left-${id}`)
+import sortTeams from './sort-teams.js';
+
+
+const columns = [
+    { id: 'Команда', class: 'name', label: 'Команда'},
+    { id: 'Побед', class: 'wins', label: '+' },
+    { id: 'Поражений', class: 'losses', label: '−' },
+    { id: 'Процент побед', class: 'percentage', label: '%' },
+];
+
+export function drawTable (teams, chartId) {
+    const table = d3.select(`#left-${chartId}`)
         .append('table')
         .attr('class', 'left');
 
-    const columns = [
-        { id: 'Команда', class: 'name', label: 'Команда'},
-        { id: 'Побед', class: 'wins', label: '+' },
-        { id: 'Поражений', class: 'losses', label: '−' },
-        { id: 'Процент побед', class: 'percentage', label: '%' },
-    ];
     const thead = table.append('thead');
     thead.append('tr')
         .selectAll('th')
@@ -18,17 +22,37 @@ export default function drawTable (teams, id) {
         .text(c => c.label);
 
     const tbody = table.append('tbody');
-    const rows = tbody.selectAll('tr')
-        .data(teams)
-        .enter().append('tr');
+    updateTable(chartId, { param: 'teams', value: teams });
+}
 
-    const cells = rows.selectAll('td')
-        .data(t => columns.map(c => ({
-            id: c.id,
-            class: c.class,
-            label: t[c.id]
-        })))
-        .enter().append('td')
-        .attr('class', c => c.class)
-        .text(c => c.label);
+export function updateTable (chartId, change) {
+    const update = {
+        'teams': (teams) => {
+            const tbody = d3.selectAll(`#${chartId} table.left tbody`);
+            const rows = tbody.selectAll('tr').data(teams, (t,i) => `${i}-${t['Команда']}`);
+            const newRows = rows.enter().append('tr');
+            rows.exit().remove();
+
+            const cells = newRows.merge(rows).selectAll('td')
+                .data(t => columns.map(c => ({
+                    team: t['Команда'],
+                    id: c.id,
+                    class: c.class,
+                    label: t[c.id]
+                })), cell => `${cell.team}-${cell.id}`);
+
+            cells.enter().append('td')
+                .merge(cells)
+                .attr('class', c => c.class)
+                .text(c => c.label);
+
+            cells.exit().remove();
+        },
+        'sortBy': (sortBy) => {
+            const teams = d3.selectAll(`#left-${chartId} tbody tr`).data();
+            update.teams(sortTeams(teams, sortBy));
+        }
+    };
+
+    update[change.param](change.value);
 }

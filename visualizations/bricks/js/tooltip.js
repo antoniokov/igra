@@ -20,8 +20,8 @@ const label = {
 };
 
 
-export function showTooltip (game, id) {
-    ['name', 'team', 'result', 'best-player'].forEach(part => d3.select(`#bricks-tooltip-${part}-${id}`).text(label[part](game)));
+export function showTooltip (game, chartId) {
+    ['name', 'team', 'result', 'best-player'].forEach(part => d3.select(`#bricks-tooltip-${part}-${chartId}`).text(label[part](game)));
 
 
     const margin = 4;
@@ -33,7 +33,7 @@ export function showTooltip (game, id) {
     const left = rect.right > 550 ? rect.right - width - margin : rect.right + margin;
     const bottom = rect.bottom > 300 ? rect.bottom - height - margin : rect.bottom + margin;
 
-    const tooltip = d3.select(`#bricks-tooltip-${id}`);
+    const tooltip = d3.select(`#bricks-tooltip-${chartId}`);
 
     tooltip
         .style('left',`${left}px`)

@@ -30,7 +30,7 @@
     border-right: solid 2px black;
 }
 
-.bricks .bricks-block .series-final {
+.bricks .brick-block .series-final {
     border-bottom: solid 2px #E2E200;
 }
 
@@ -38,6 +38,6 @@
     border-bottom: solid 2px #09A6DA;
 }
 
-.bricks table.bricks-block {
+.bricks table.brick-block {
     margin-right: 8px;
 }

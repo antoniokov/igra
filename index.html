@@ -30,18 +30,26 @@
 <body>
     <h1>Команды</h1>
 
-    <h2>По проценту побед</h2>
+    <h2><span style="color: #24693D">Победы</span> и <span style="color: #9E9E9E">поражения</span> в хронологическом порядке</h2>
     <a href="https://www.instagram.com/p/BkxQpMSn_F1" target="_blank">
         <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
     </a>
-    <div id="basic" class="bricks" data-sort-by="Процент побед"></div>
-
-    <h2>По количеству игр</h2>
-    <a href="https://www.instagram.com/p/Bk27xhEHc9s" target="_blank">
-        <img src="img/instagram.png" alt="Instagram logo" class="instagram-logo">
-    </a>
-    <div id="seasons" class="bricks" data-sort-by="Игр" data-group-by="Сезон"></div>
-
+    <div>
+        <label for="select-bricks-sort-by">Упорядоченные по</label>
+        <select id="select-bricks-sort-by">
+            <option value="Игр" selected>количеству игр</option>
+            <option value="Побед">количеству побед</option>
+            <option value="Процент побед">% побед</option>
+        </select>
+        <label for="select-bricks-group-by">команды и их игры, сгруппированные по</label>
+        <select id="select-bricks-group-by">
+            <option value="" selected></option>
+            <option value="Сезон">сезонам</option>
+            <option value="Серия">сериям</option>
+            <option value="Тип">типам</option>
+        </select>
+    </div>
+    <div id="chart-bricks" class="bricks"></div>
 
     <h1>Игры</h1>
     <h2>Процент побед знатоков по сезонам</h2>
@@ -55,9 +63,7 @@
     <h2>Лидеры</h2>
     <div id="best-players" class="interactive-stacked-bars">
         <label for="select-best-players">Больше всего</label>
-        <select id="select-best-players">
-
-        </select>
+        <select id="select-best-players"></select>
         <span>среди сыгравших хотя бы 5 игр</span>
     </div>
     <div id="chart-best-players" style="width: 900px; height: 500px"></div>
@@ -65,9 +71,7 @@
     <h2>Кому пришлось помучаться, чтобы получить хрустальную сову?</h2>
     <div id="before-owl" class="interactive-stacked-bars">
         <label for="select-before-owl">Больше всего</label>
-        <select id="select-before-owl">
-
-        </select>
+        <select id="select-before-owl"></select>
         <span>до получения первой совы</span>
     </div>
     <div id="chart-before-owl" style="width: 900px; height: 500px"></div>
@@ -75,9 +79,7 @@
     <h2>Кому уже пора дать сову?</h2>
     <div id="without-owl" class="interactive-stacked-bars">
         <label for="select-without-owl">Больше всего</label>
-        <select id="select-without-owl">
-
-        </select>
+        <select id="select-without-owl"></select>
         <span>и нет совы</span>
     </div>
     <div id="chart-without-owl" style="width: 900px; height: 500px"></div>
