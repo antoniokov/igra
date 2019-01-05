@@ -1,17 +1,18 @@
-const measuresWhiteList = ['Ответов', 'Игр', 'Финалов', 'Призов лучшему знатоку' , 'Суперблицев', 'Решающих раундов'];
+const measures = ['Ответов', 'Игр', 'Финалов', 'Призов лучшему знатоку' , 'Суперблицев', 'Решающих раундов'];
 
 export default {
     id: 'without-owl',
+    entity: 'Знаток',
     dataSource: 'players',
     preFilter: (row) => row['Малых сов'] + row['Больших сов'] === 0 && row['Только в благотворительных'] !== 'Да',
-    measuresWhiteList: measuresWhiteList,
+    measures: measures,
     top: 24,
     postRender: (results) => {
         const [beforeOwl, withoutOwl] = results;
         const averageOwlAnnotations = beforeOwl.annotations.map(a => Object.assign(a, { text: 'Средняя сова' }));
 
         const beforeOwlPluses = beforeOwl.dataTransformed.filter(s => s['Результат'] === '+');
-        const toughestOwlAnnotations = measuresWhiteList.map(m => {
+        const toughestOwlAnnotations = measures.map(m => {
             const maximum = beforeOwlPluses.reduce((maxObj, dp) => {
                 return dp[m] > maxObj.value ? { value: dp[m], player: dp['Знаток'] } : maxObj;
             }, { value: 0, player: null });

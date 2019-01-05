@@ -2,6 +2,7 @@ const measuresWhiteList = ['Ответов', 'Игр', 'Финалов', 'При
 
 export default {
     id: 'before-owl',
+    entity: 'Знаток',
     dataSource: 'before-owl',
     measuresWhiteList: measuresWhiteList,
     calculateAnnotations: (dataTransformed) => {

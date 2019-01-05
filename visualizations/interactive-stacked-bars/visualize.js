@@ -5,10 +5,10 @@ const splitMeasure = (measure, sign, row) => {
     return sign === '+' ? plus : row[measure] - plus;
 };
 
-const sortMeasureTemplate = (data, measure) => (dp1, dp2) => {
-    const getMeasure = (player, m) => data.filter(r => r['Знаток'] === player)[0][m];
-    const plusesDiff = getMeasure(dp2['Знаток'], measureToPlus[measure]) - getMeasure(dp1['Знаток'], measureToPlus[measure]);
-    return plusesDiff || (getMeasure(dp2['Знаток'], measure) - getMeasure(dp1['Знаток'], measure));
+const sortMeasureTemplate = (data, measure, entity) => (dp1, dp2) => {
+    const getMeasure = (player, m) => data.filter(r => r[entity] === player)[0][m];
+    const plusesDiff = getMeasure(dp2[entity], measureToPlus[measure]) - getMeasure(dp1[entity], measureToPlus[measure]);
+    return plusesDiff || (getMeasure(dp2[entity], measure) - getMeasure(dp1[entity], measure));
 };
 
 const getSortedTop = (dataTransformed, sortingFunction, top = null) => {
@@ -20,11 +20,11 @@ const getSortedTop = (dataTransformed, sortingFunction, top = null) => {
 
 const visualize = (data, v) => {
     const dataFiltered = v.preFilter ? data.filter(v.preFilter) : data;
-    v.measures = measures.filter(m => !v.measuresWhiteList || v.measuresWhiteList.includes(m.id));
+    v.measures = measures.filter(m => !v.measures || v.measures.includes(m.id));
 
     const dataTransformed = dataFiltered.reduce((result, row) => {
         ['+', '-'].forEach(r => {
-            const obj = { 'Знаток': row['Знаток'], 'Результат': r };
+            const obj = { [v.entity]: row[v.entity], 'Результат': r };
             v.measures.forEach(m => obj[m.id] = splitMeasure(m.id, r, row));
             result.push(obj);
         });
@@ -35,14 +35,14 @@ const visualize = (data, v) => {
     v.dataTransformed = dataTransformed;
 
     const defaultMeasure = v.measures[0].id;
-    const dataReady = getSortedTop(dataTransformed, sortMeasureTemplate(data, defaultMeasure), v.top);
+    const dataReady = getSortedTop(dataTransformed, sortMeasureTemplate(data, defaultMeasure, v.entity), v.top);
 
 
     v.config = {
         data: dataReady,
         type: 'horizontal-stacked-bar',
         x: defaultMeasure,
-        y: 'Знаток',
+        y: v.entity,
         color: 'Результат',
         guide: {
             color: {
@@ -54,7 +54,7 @@ const visualize = (data, v) => {
             showGridLines: ''
         },
         settings: {
-            fitModel: 'fit-width'
+            fitModel: 'entire-view'
         },
         plugins: [
             Taucharts.api.plugins.get('tooltip')()
@@ -84,7 +84,7 @@ const visualize = (data, v) => {
     select.addEventListener('change', (e) => {
         const measure = e.currentTarget.value;
         v.config.x = measure;
-        v.config.data = getSortedTop(v.dataTransformed, sortMeasureTemplate(data, measure), v.top);
+        v.config.data = getSortedTop(v.dataTransformed, sortMeasureTemplate(data, measure, v.entity), v.top);
         v.chart.updateConfig(v.config);
     });
 

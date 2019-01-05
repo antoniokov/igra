@@ -5,7 +5,9 @@ import beforeOwl from './players/before-owl.js';
 import withoutOwl from './players/without-owl.js';
 import bestPlayers from './players/best-players.js';
 
-const visualizationsAvailable = [ beforeOwl, withoutOwl, bestPlayers ];
+import bestTeams from './teams/best-teams.js'
+
+const visualizationsAvailable = [ beforeOwl, withoutOwl, bestPlayers, bestTeams ];
 
 const nodes = document.getElementsByClassName('interactive-stacked-bars');
 const visualizations = visualizationsAvailable.filter(v => [...nodes].some(n => n.id === v.id));
