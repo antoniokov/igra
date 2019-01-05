@@ -4,6 +4,10 @@ export default [
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/winning-percentage-by-seasons.json'
     },
     {
+        id: 'winning-percentage-by-seasons-detailed',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/winning-percentage-by-seasons-detailed.json'
+    },
+    {
         id: 'before-owl',
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/before-owl.json'
     },
