@@ -32,5 +32,9 @@ export default [
         id: 'authors',
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/raw/%D0%A2%D0%B5%D0%BB%D0%B5%D0%B7%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D0%B8.json',
         postProcess: authors => authors.filter(a => a['№'] > 0)
+    },
+    {
+        id: 'best-player-sexism',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/best-player-sexism.json'
     }
 ];

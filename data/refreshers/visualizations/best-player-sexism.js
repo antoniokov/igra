@@ -18,7 +18,7 @@ const refresh = sheets => {
     const sexes = ['М', 'Ж'].map(sex => {
         const g = games.filter(g => g['Пол'] === sex);
         const stats = ['Ответов', 'Правильных ответов'].reduce((obj, m) => Object.assign(obj, {
-            [m]: g.reduce((sum, g) => sum + g[m], 0) / g.length
+            [m]: Math.round(10 * g.reduce((sum, g) => sum + g[m], 0) / g.length)/10
         }), {});
         return Object.assign( { 'Пол': sexLabels[sex] }, stats);
     });
