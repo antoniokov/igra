@@ -14,6 +14,7 @@ loadAsync('round-types')
                     min: 0,
                     max: 1
                 },
+                y: { label: { text: ' ' } },
                 color: {
                     brewer: ['#24693D']
                 },

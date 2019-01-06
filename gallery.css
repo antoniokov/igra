@@ -40,3 +40,7 @@ label, span {
 .tauchart > svg{
     display:block;
 }
+
+.tau-chart__svg .label .label-token {
+    text-transform: none !important;
+}

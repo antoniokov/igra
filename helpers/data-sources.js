@@ -36,5 +36,17 @@ export default [
     {
         id: 'best-player-sexism',
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/best-player-sexism.json'
+    },
+    {
+        id: 'questions',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/raw/%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B.json'
+    },
+    {
+        id: 'lineups',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/raw/%D0%A1%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D1%8B.json'
+    },
+    {
+        id: 'players-cumulative-answers',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/players-cumulative-answers.json'
     }
 ];
