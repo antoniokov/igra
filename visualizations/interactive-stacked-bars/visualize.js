@@ -20,9 +20,10 @@ const getSortedTop = (dataTransformed, sortingFunction, top = null) => {
 
 const visualize = (data, v) => {
     const dataFiltered = v.preFilter ? data.filter(v.preFilter) : data;
+    const dataProcessed = v.preProcess ? dataFiltered.map(v.preProcess) : dataFiltered;
     v.measures = measures.filter(m => !v.measures || v.measures.includes(m.id));
 
-    const dataTransformed = dataFiltered.reduce((result, row) => {
+    const dataTransformed = dataProcessed.reduce((result, row) => {
         ['+', '-'].forEach(r => {
             const obj = { [v.entity]: row[v.entity], 'Результат': r };
             v.measures.forEach(m => obj[m.id] = splitMeasure(m.id, r, row));
@@ -35,7 +36,7 @@ const visualize = (data, v) => {
     v.dataTransformed = dataTransformed;
 
     const defaultMeasure = v.measures[0].id;
-    const dataReady = getSortedTop(dataTransformed, sortMeasureTemplate(data, defaultMeasure, v.entity), v.top);
+    const dataReady = getSortedTop(dataTransformed, sortMeasureTemplate(dataProcessed, defaultMeasure, v.entity), v.top);
 
 
     v.config = {
@@ -84,7 +85,7 @@ const visualize = (data, v) => {
     select.addEventListener('change', (e) => {
         const measure = e.currentTarget.value;
         v.config.x = measure;
-        v.config.data = getSortedTop(v.dataTransformed, sortMeasureTemplate(data, measure, v.entity), v.top);
+        v.config.data = getSortedTop(v.dataTransformed, sortMeasureTemplate(dataProcessed, measure, v.entity), v.top);
         v.chart.updateConfig(v.config);
     });
 
