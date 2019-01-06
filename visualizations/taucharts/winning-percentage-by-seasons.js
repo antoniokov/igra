@@ -30,7 +30,7 @@ loadAsync('winning-percentage')
                 showAnchors: 'always'
             },
             settings: {
-                fitModel: 'entire-view'
+                fitModel: 'fit-width'
             },
             plugins: [
                 Taucharts.api.plugins.get('tooltip')({

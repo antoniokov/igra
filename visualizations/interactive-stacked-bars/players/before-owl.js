@@ -1,13 +1,13 @@
-const measuresWhiteList = ['Ответов', 'Игр', 'Финалов', 'Призов лучшему знатоку' , 'Суперблицев', 'Решающих раундов'];
+const measures = ['Ответов', 'Игр', 'Финалов', 'Призов лучшему знатоку' , 'Суперблицев', 'Решающих раундов'];
 
 export default {
     id: 'before-owl',
     entity: 'Знаток',
     dataSource: 'before-owl',
-    measuresWhiteList: measuresWhiteList,
+    measures: measures,
     calculateAnnotations: (dataTransformed) => {
         const dataPluses = dataTransformed.filter(s => s['Результат'] === '+');
-        return measuresWhiteList.map(m => {
+        return measures.map(m => {
             const sum = dataPluses.reduce((result, s) => result + s[m], 0);
             const average = sum/dataPluses.length;
             return {
