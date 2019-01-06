@@ -1,4 +1,5 @@
-const measures = ['Ответов', 'Игр', 'Финалов', 'Призов лучшему знатоку', 'Процент лучших' , 'Суперблицев', 'Решающих раундов'];
+const measures = ['Ответов', 'Игр', 'Финалов', 'Призов лучшему знатоку' , 'Суперблицев', 'Решающих раундов'];
+// , 'Процент лучших' - cutoff # of games
 
 export default {
     id: 'without-owl',
@@ -12,18 +13,20 @@ export default {
         const averageOwlAnnotations = beforeOwl.annotations.map(a => Object.assign(a, { text: 'Средняя сова' }));
 
         const beforeOwlPluses = beforeOwl.dataTransformed.filter(s => s['Результат'] === '+');
-        const toughestOwlAnnotations = measures.map(m => {
-            const maximum = beforeOwlPluses.reduce((maxObj, dp) => {
-                return dp[m] > maxObj.value ? { value: dp[m], player: dp['Знаток'] } : maxObj;
-            }, { value: 0, player: null });
+        const toughestOwlAnnotations = measures
+            //.filter(m => !['Процент лучших'].includes(m))
+            .map(m => {
+                const maximum = beforeOwlPluses.reduce((maxObj, dp) => {
+                    return dp[m] > maxObj.value ? { value: dp[m], player: dp['Знаток'] } : maxObj;
+                }, { value: 0, player: null });
 
-            return {
-                dim: m,
-                val: maximum.value,
-                color: '#24693D',
-                text: maximum.player
-            };
-        });
+                return {
+                    dim: m,
+                    val: maximum.value,
+                    color: '#24693D',
+                    text: maximum.player
+                };
+            });
 
         const annotations = [...averageOwlAnnotations, ...toughestOwlAnnotations];
         withoutOwl.config.plugins.push(Taucharts.api.plugins.get('annotations')({ items: annotations }));
