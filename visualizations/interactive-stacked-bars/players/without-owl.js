@@ -6,7 +6,7 @@ export default {
     entity: 'Знаток',
     dataSource: 'players',
     preFilter: (row) => row['Малых сов'] + row['Больших сов'] === 0 && row['Только в благотворительных'] !== 'Да',
-    measures: measures,
+    measuresList: measures,
     top: 24,
     postRender: (results) => {
         const [beforeOwl, withoutOwl] = results;

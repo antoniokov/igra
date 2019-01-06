@@ -4,7 +4,7 @@ export default {
     id: 'before-owl',
     entity: 'Знаток',
     dataSource: 'before-owl',
-    measures: measures,
+    measuresList: measures,
     calculateAnnotations: (dataTransformed) => {
         const dataPluses = dataTransformed.filter(s => s['Результат'] === '+');
         return measures.map(m => {
