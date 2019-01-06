@@ -16,6 +16,12 @@ const refresh = sheets => {
         //'Сергей Башлыкевич': 'Раскрылись не сразу',
     };
 
+    const categoryOrder = {
+        'Лидеры': 0,
+        'Засухи': 1,
+        'Раскрылись не сразу': 2
+    };
+
 
     sheets['Знатоки'].sort((p1, p2) => p2['Правильных'] - p1['Правильных']);
     const cumulativeLeaders = sheets['Знатоки'].slice(0, 5).map(p => p['Знаток']);
@@ -85,6 +91,11 @@ const refresh = sheets => {
 
         return result;
     }, []);
+
+    data.sort((d1, d2) => {
+        const categoryDiff = categoryOrder[d1['Категория']] - categoryOrder[d2['Категория']];
+        return categoryDiff;
+    });
 
     return data;
 };
