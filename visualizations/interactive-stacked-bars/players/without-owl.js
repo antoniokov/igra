@@ -12,7 +12,7 @@ export default {
         const [beforeOwl, withoutOwl] = results;
         const averageOwlAnnotations = beforeOwl.annotations.map(a => Object.assign(a, { text: 'Средняя сова' }));
 
-        const beforeOwlPluses = beforeOwl.dataTransformed.filter(s => s['Результат'] === '+');
+        const beforeOwlPluses = beforeOwl.dataLabeled.filter(s => s['Результат'] === '+');
         const toughestOwlAnnotations = measures
             //.filter(m => !['Процент лучших'].includes(m))
             .map(m => {
