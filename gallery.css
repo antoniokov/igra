@@ -36,3 +36,7 @@ label, span {
     max-width: 1000px;
     margin-top: 4px;
 }
+
+.tauchart > svg{
+    display:block;
+}

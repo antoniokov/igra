@@ -8,6 +8,10 @@ export default [
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/winning-percentage-by-seasons-detailed.json'
     },
     {
+        id: 'round-types',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/round-types.json'
+    },
+    {
         id: 'before-owl',
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/before-owl.json'
     },

@@ -42,5 +42,5 @@ loadAsync('winning-percentage-by-seasons-detailed')
             ]
         });
 
-        chart.renderTo('#chart-winning-percentage-by-seasons-2');
+        chart.renderTo('#chart-winning-percentage-by-seasons-detailed');
     });
