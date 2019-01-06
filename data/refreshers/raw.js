@@ -7,11 +7,13 @@ const refreshRaw = callback => {
     const meta = {
         date: {
             parse: d => new Date(...d.split('.').reverse()),
-            fields: ['Дата']
+            fields: ['Дата', 'Первая игра', 'Последняя игра']
         },
         float: {
             parse: d => typeof d === 'string' ? +parseFloat(d.replace(',', '.')).toFixed(2) : d,
-            fields: ['Процент правильных', 'Ответов за игру', 'Правильных ответов за игру']
+            fields: ['Процент правильных', 'Процент побед', 'Процент выигравших', 'Процент выигранных блицев',
+                'Процент полезной помощи',
+                'Ответов за игру', 'Правильных ответов за игру', 'Досрочных за игру', 'Правильных досрочных за игру']
         }
     };
 
@@ -34,7 +36,7 @@ const refreshRaw = callback => {
             return Promise.all(Object.keys(sheets).map(s => saveToFileAsync(`./raw/${s}.json`, sheets[s].elements)))
                 .then(() => {
                     console.info('raw files saved');
-                    return callback()
+                    return callback && callback();
                 });
         }
     });
