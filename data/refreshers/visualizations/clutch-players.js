@@ -38,9 +38,9 @@ const refresh = sheets => {
             'Знаток': p,
             'Процент правильных': Math.round(1000*clutchPlayersStats[p]['Правильных']/clutchPlayersStats[p]['Ответов'])/10,
             'Процент принятия ответственности': Math.round(1000*clutchPlayersStats[p]['Ответов']/chances)/10,
-            'Процент удачного принятия ответственности': Math.round(1000*clutchPlayersStats[p]['Правильных']/chances)/10,
+            'Процент успешного принятия ответственности': Math.round(1000*clutchPlayersStats[p]['Правильных']/chances)/10,
             'Попыток спасений за игру': Math.round(10*clutchPlayersStats[p]['Ответов']/gameIds.length)/10,
-            'Удачных спасений за игру': Math.round(10*clutchPlayersStats[p]['Правильных']/gameIds.length)/10
+            'Успешных спасений за игру': Math.round(10*clutchPlayersStats[p]['Правильных']/gameIds.length)/10
         }, clutchPlayersStats[p]);
     });
 
