@@ -71,7 +71,7 @@ const refresh = sheets => {
     });
 
     dataFiltered.sort((d1, d2) => {
-        const teamDiff = getTeam(d2)['Игр'] - getTeam(d1)['Игр'];
+        const teamDiff = new Date(getTeam(d2)['Последняя игра']) - new Date(getTeam(d1)['Последняя игра']);
         return teamDiff || (d2['Процент ответов']- d1['Процент ответов']);
     });
 
