@@ -10,11 +10,12 @@ const refresh = sheets => {
             const add = previousRound['Выиграли'] === 'Знатоки' ? 0 : 1;
             return [...result, Object.assign({ pointsAgainst: previousRound.pointsAgainst + add }, r)];
         }, [])
-        .filter(r => r.pointsAgainst === 5 || r['РР'] === 'РР')
-        .map(r => r['ID раунда']);
+        .filter(r => r.pointsAgainst === 5 || r['РР'] === 'РР');
+
+    const clutchRoundIds = clutchRounds.map(r => r['ID раунда']);
 
     const clutchPlayersStats = sheets['Вопросы']
-        .filter(q => clutchRounds.includes(q['ID раунда']))
+        .filter(q => clutchRoundIds.includes(q['ID раунда']))
         .reduce((result, q) => {
             const player = q['Отвечал'];
             if (!(player in result))
@@ -27,12 +28,22 @@ const refresh = sheets => {
             return result;
         }, {});
 
-    const clutchPlayers = Object.keys(clutchPlayersStats).map(p => Object.assign({
-        'Знаток': p,
-        'Процент правильных': Math.round(1000*clutchPlayersStats[p]['Правильных']/clutchPlayersStats[p]['Ответов'])/10
-    }, clutchPlayersStats[p]));
+    const clutchPlayers = Object.keys(clutchPlayersStats).map(p => {
+        const gameIds = sheets['Составы']
+            .filter(l => l['Знаток'] === p)
+            .map(l => l['ID игры']);
+        const chances = clutchRounds.filter(r => gameIds.includes(r['ID игры'])).length;
 
-    console.log(clutchPlayers);
+        return Object.assign({
+            'Знаток': p,
+            'Процент правильных': Math.round(1000*clutchPlayersStats[p]['Правильных']/clutchPlayersStats[p]['Ответов'])/10,
+            'Процент принятия ответственности': Math.round(1000*clutchPlayersStats[p]['Ответов']/chances)/10,
+            'Процент удачного принятия ответственности': Math.round(1000*clutchPlayersStats[p]['Правильных']/chances)/10,
+            'Попыток спасений за игру': Math.round(10*clutchPlayersStats[p]['Ответов']/gameIds.length)/10,
+            'Удачных спасений за игру': Math.round(10*clutchPlayersStats[p]['Правильных']/gameIds.length)/10
+        }, clutchPlayersStats[p]);
+    });
+
     return clutchPlayers;
 };
 
