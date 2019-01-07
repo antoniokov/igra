@@ -52,5 +52,9 @@ export default [
     {
         id: 'answers-frequency-by-team',
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/answers-frequency-by-team.json'
+    },
+    {
+        id: 'clutch-players',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/clutch-players.json'
     }
 ];
