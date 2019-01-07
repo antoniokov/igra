@@ -1,3 +1,5 @@
+const insertOwls = require('../helpers/insert-owls');
+
 const refresh = sheets => {
     const clutchRounds = sheets['Раунды']
         .filter(r => r['Тип игры'] !== 'Благотворительная')
@@ -34,8 +36,9 @@ const refresh = sheets => {
             .map(l => l['ID игры']);
         const chances = clutchRounds.filter(r => gameIds.includes(r['ID игры'])).length;
 
+        const player = sheets['Знатоки'].filter(plr => plr['Знаток'] === p)[0];
         return Object.assign({
-            'Знаток': p,
+            'Знаток': insertOwls(player, 'Знаток'),
             'Шансов взять ответственность на себя': chances,
             'Процент правильных': Math.round(1000*clutchPlayersStats[p]['Правильных']/clutchPlayersStats[p]['Ответов'])/10,
             'Процент принятия ответственности': Math.round(1000*clutchPlayersStats[p]['Ответов']/chances)/10,
