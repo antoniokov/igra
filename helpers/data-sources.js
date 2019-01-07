@@ -48,5 +48,9 @@ export default [
     {
         id: 'players-cumulative-answers',
         url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/players-cumulative-answers.json'
+    },
+    {
+        id: 'answers-frequency-by-team',
+        url: 'https://raw.githubusercontent.com/antoniokov/igra/master/data/viz/answers-frequency-by-team.json'
     }
 ];
