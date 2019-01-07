@@ -39,6 +39,7 @@ const refresh = sheets => {
         const player = sheets['Знатоки'].filter(plr => plr['Знаток'] === p)[0];
         return Object.assign({
             'Знаток': insertOwls(player, 'Знаток'),
+            'Игр': player['Игр'],
             'Шансов взять ответственность на себя': chances,
             'Процент правильных': Math.round(1000*clutchPlayersStats[p]['Правильных']/clutchPlayersStats[p]['Ответов'])/10,
             'Процент принятия ответственности': Math.round(1000*clutchPlayersStats[p]['Ответов']/chances)/10,
