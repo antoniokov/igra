@@ -38,6 +38,9 @@ const refresh = sheets => {
 
     const data = Object.keys(playersStats).reduce((result, p) => {
         const player = sheets['Знатоки'].filter(plr => plr['Знаток'] === p)[0];
+        const owls = player['Малых сов'] + player['Больших сов'];
+        const owlSymbols = Array(owls).fill('🦉').join('');
+
         Object.keys(playersStats[p]).forEach(t => {
             const playerTeamGames = Object.keys(playersStats[p][t]);
             const gamesSummary = playerTeamGames.reduce((summary, g) => {
@@ -51,7 +54,7 @@ const refresh = sheets => {
 
 
             result.push(Object.assign({
-                'Знаток': p,
+                'Знаток': owls ? `${owlSymbols} ${p}` : p,
                 'Тип игрока': isCaptain(p, t) ? 'Капитан' : (player && player['Текущая команда'] === t ? 'Полевой' : 'Бывший'),
                 'Команда': t,
                 'Игр': playerTeamGames.length,
