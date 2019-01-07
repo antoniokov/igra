@@ -7,7 +7,8 @@ const visualizations = [
     { name: 'round-types', refresh: require('./visualizations/round-types').refresh },
     { name: 'best-player-sexism', refresh: require('./visualizations/best-player-sexism').refresh },
     { name: 'players-cumulative-answers', refresh: require('./visualizations/players-cumulative-answers').refresh },
-    { name: 'answers-frequency-by-team', refresh: require('./visualizations/answers-frequency-by-team').refresh }
+    { name: 'answers-frequency-by-team', refresh: require('./visualizations/answers-frequency-by-team').refresh },
+    { name: 'clutch-players', refresh: require('./visualizations/clutch-players').refresh }
 ];
 
 
