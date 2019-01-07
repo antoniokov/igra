@@ -5,14 +5,19 @@ const splitMeasure = (measure, sign, row) => {
     return sign === '+' ? plus : row[measure] - plus;
 };
 
-const sortMeasureTemplate = (data, measure, entity) => (dp1, dp2) => {
-    const getMeasure = (player, m) => data.filter(r => r[entity] === player)[0][m];
+const sortMeasureTemplate = (dataProcessed, measure, entity) => (dp1, dp2) => {
+    const getMeasure = (player, m) => dataProcessed.filter(r => r[entity] === player)[0][m];
     const plusesDiff = getMeasure(dp2[entity], measuresMeta[measure].plus) - getMeasure(dp1[entity], measuresMeta[measure].plus);
     return plusesDiff || (getMeasure(dp2[entity], measure) - getMeasure(dp1[entity], measure));
 };
 
-const getSortedTop = (dataLabeled, sortingFunction, top = null) => {
-    const sorted = dataLabeled.slice();
+const getSortedTop = (dataLabeled, dataProcessed, measure, entity, top = null) => {
+    const getRow = (name, entity) => dataProcessed.filter(dp => dp[entity] === name)[0];
+    const sorted = measuresMeta[measure].cutoff
+        ? dataLabeled.filter(dl => measuresMeta[measure].cutoff(getRow(dl[entity], entity)))
+        : dataLabeled.slice();
+
+    const sortingFunction = sortMeasureTemplate(dataProcessed, measure, entity);
     sorted.sort(sortingFunction);
     return top ? sorted.slice(0, top*2) : sorted;
 };
@@ -52,7 +57,7 @@ const visualize = (data, v) => {
     v.dataLabeled = dataLabeled;
 
     const defaultMeasure = v.measures[0].id;
-    const dataReady = getSortedTop(dataLabeled, sortMeasureTemplate(dataProcessed, defaultMeasure, v.entity), v.top);
+    const dataReady = getSortedTop(dataLabeled, dataProcessed, defaultMeasure, v.entity, v.top);
 
 
     v.config = {
@@ -101,7 +106,7 @@ const visualize = (data, v) => {
     select.addEventListener('change', (e) => {
         const measure = e.currentTarget.value;
         v.config.x = measure;
-        v.config.data = getSortedTop(v.dataLabeled, sortMeasureTemplate(dataProcessed, measure, v.entity), v.top);
+        v.config.data = getSortedTop(v.dataLabeled, dataProcessed, measure, v.entity, v.top);
         v.chart.updateConfig(v.config);
     });
 
