@@ -1,7 +1,7 @@
 import dataSources from './data-sources.js';
 
 
-const dateFields = ['Дата'];
+const dateFields = ['Дата', 'Первая игра', 'Последняя игра'];
 
 
 export async function loadAsync (dataSourceId) {
