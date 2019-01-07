@@ -1,13 +1,13 @@
-import { measures, measureToPlus } from '../../helpers/measures.js';
+import { measures, measuresMeta } from '../../helpers/measures.js';
 
 const splitMeasure = (measure, sign, row) => {
-    const plus = row[measureToPlus[measure]];
+    const plus = row[measuresMeta[measure].plus];
     return sign === '+' ? plus : row[measure] - plus;
 };
 
 const sortMeasureTemplate = (data, measure, entity) => (dp1, dp2) => {
     const getMeasure = (player, m) => data.filter(r => r[entity] === player)[0][m];
-    const plusesDiff = getMeasure(dp2[entity], measureToPlus[measure]) - getMeasure(dp1[entity], measureToPlus[measure]);
+    const plusesDiff = getMeasure(dp2[entity], measuresMeta[measure].plus) - getMeasure(dp1[entity], measuresMeta[measure].plus);
     return plusesDiff || (getMeasure(dp2[entity], measure) - getMeasure(dp1[entity], measure));
 };
 
@@ -35,15 +35,15 @@ const visualize = (data, v) => {
 
 
     const toTooltip = (field) => `${field} `;
-    const tooltipFields = [v.entity, ...v.measures.map(m => m.id === measureToPlus[m.id] ? m.id : toTooltip(m.id))];
+    const tooltipFields = [v.entity, ...v.measures.map(m => m.id === measuresMeta[m.id].plus ? m.id : toTooltip(m.id))];
     const dataLabeled = dataTransformed.map(dt => {
         const stats = dataProcessed.filter(dp => dt[v.entity] === dp[v.entity])[0];
 
         const extraFields = v.measures.reduce((obj, m) => {
-            if (m.id === measureToPlus[m.id])
+            if (m.id === measuresMeta[m.id].plus)
                 return obj;
 
-            return Object.assign(obj, { [toTooltip(m.id)]: `${stats[measureToPlus[m.id]]}/${stats[m.id]}`})
+            return Object.assign(obj, { [toTooltip(m.id)]: `${stats[measuresMeta[m.id].plus]}/${stats[m.id]}`})
         }, {});
 
         return Object.assign({}, dt, extraFields);
