@@ -29,6 +29,7 @@ loadAsync('answers-frequency-by-team')
             },
             plugins: [
                 Taucharts.api.plugins.get('tooltip')(),
+                Taucharts.api.plugins.get('floating-axes')(),
                 Taucharts.api.plugins.get('annotations')({ items: [{
                         dim: 'Процент ответов',
                         val: 1/6,
