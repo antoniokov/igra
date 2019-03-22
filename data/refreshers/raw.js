@@ -1,7 +1,7 @@
 const tabletop = require('tabletop');
 const saveToFileAsync = require('./helpers/save-to-file');
 const sheetsNames = require('./helpers/get-all-sheets').sheetsNames;
-const publicSpreadsheetUrl = '1eo10PIQrAZcXUxCObB2KQeAnkM7BrKo2Q9NmzxPieBU';
+const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1iI1sYfViVeaXXZwNwSZHgxx_ypAFKtRIEEG3C-uwq6M/pubhtml';//'1eo10PIQrAZcXUxCObB2KQeAnkM7BrKo2Q9NmzxPieBU';
 
 const refreshRaw = callback => {
     const meta = {
