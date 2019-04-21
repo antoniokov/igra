@@ -6,7 +6,10 @@ const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1eo10PIQrAZ
 const refreshRaw = callback => {
     const meta = {
         date: {
-            parse: d => new Date(...d.split('.').reverse()),
+            parse: d => {
+                const [day, month, year] = d.split('.');
+                return new Date(`${year}-${month}-${day}`);
+            },
             fields: ['Дата', 'Первая игра', 'Последняя игра']
         },
         float: {
